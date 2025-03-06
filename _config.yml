@@ -1,18 +1,9 @@
-title: "Mason Tatafu's Portfolio"
-description: "Welcome to my personal website"
-author: "Mason Tatafu"
+theme: null  # Disables GitHub's default theme so we use our custom styles
+markdown: kramdown  # Ensures Markdown processing works correctly
 include:
-  - assets
-
-markdown: kramdown
-theme: null
-exclude: 
+  - _layouts  # Ensures GitHub Pages includes the layout files
+  - assets  # Ensures the assets folder is processed
+exclude:
   - README.md
-  - LICENSE
   - Gemfile
   - Gemfile.lock
-
-plugins: 
-  - jekyll-seo-tag
-  - jekyll-sitemap
-
