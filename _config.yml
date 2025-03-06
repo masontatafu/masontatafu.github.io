@@ -1,1 +1,30 @@
-theme: minima
+title: "Mason Tatafu's Portfolio"
+description: "Welcome to my personal website"
+author: "Mason Tatafu"
+url: "https://masontatafu.github.io"
+
+markdown: kramdown
+theme: null
+exclude: 
+  - README.md
+  - LICENSE
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+
+plugins: 
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+nav:
+  - title: "Home"
+    url: "/"
+  - title: "About"
+    url: "/about"
+  - title: "Skills"
+    url: "/skills"
+  - title: "Projects"
+    url: "/projects"
+  - title: "Contact"
+    url: "/contact"
+
