@@ -18,52 +18,5 @@ title: "Home"
     <a href="Mason Tatafu Current Resume - 2025.pdf" target="_blank" class="resume-button">View My Resume</a> 
 </div>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: white;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-    }
-
-    nav {
-        background-color: #007bff;
-        padding: 15px;
-        text-align: center;
-    }
-
-    nav a {
-        color: white;
-        text-decoration: none;
-        font-size: 1.2em;
-        margin: 0 15px;
-    }
-
-    nav a:hover {
-        text-decoration: underline;
-    }
-
-    .container {
-        padding: 50px;
-    }
-
-    .profile-img {
-        width: 200px;
-        border-radius: 50%;
-        margin: 20px auto;
-    }
-
-    .resume-button {
-        display: inline-block;
-        padding: 15px 30px;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        font-size: 1.2em;
-        border-radius: 10px;
-        margin-top: 20px;
-    }
-</style>
 
 
