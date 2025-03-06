@@ -1,11 +1,13 @@
 <link rel="stylesheet" type="text/css" href="/assets/style.css">
 
 <nav>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/skills">Skills</a>
-    <a href="/projects">Projects</a>
-    <a href="/contact">Contact</a>
+    <ul>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/skills">Skills</a>
+        <a href="/projects">Projects</a>
+        <a href="/contact">Contact</a>
+    </ul>
 </nav>
 
 <div class="container">
