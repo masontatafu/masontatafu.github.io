@@ -1,1 +1,15 @@
-theme: minima
+title: "Mason Tatafu's Portfolio"
+description: "Welcome to my personal website"
+author: "Mason Tatafu"
+url: "https://masontatafu.github.io"
+
+markdown: kramdown
+theme: null
+exclude: 
+  - README.md
+  - LICENSE
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+
+  
