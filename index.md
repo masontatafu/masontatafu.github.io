@@ -1,10 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/assets/style.css">
 
-
----
-title: "Home"
----
-
 <nav>
     <a href="/">Home</a>
     <a href="/about">About</a>
