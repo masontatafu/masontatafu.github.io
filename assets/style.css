@@ -1,39 +1,62 @@
-/* Style for the main heading */
-.heading {
-    font-size: 36px;
-    color: #007bff;
-    text-align: center;
-    font-weight: bold;
+/* ===== NAVIGATION BAR STYLES ===== */
+nav {
+    background-color: #007bff; /* Sets the background color to blue */
+    padding: 15px; /* Adds padding to space out content */
+    text-align: center; /* Centers the navigation links */
 }
 
-/* Style for the subheading (welcome message) */
-.subheading {
-    font-size: 20px;
-    color: gray;
-    text-align: center;
+nav a {
+    color: white; /* Makes text color white */
+    text-decoration: none; /* Removes the underline from links */
+    font-size: 1.2em; /* Increases font size */
+    margin: 0 20px; /* Spaces out the navigation links */
+    font-weight: bold; /* Makes text bold */
 }
 
-/* Style for profile image */
+nav a:hover {
+    text-decoration: underline; /* Adds underline effect when hovered */
+}
+
+/* ===== CONTAINER STYLES (CENTERS CONTENT) ===== */
+.container {
+    text-align: center; /* Centers all text inside */
+    max-width: 800px; /* Limits the width of the content */
+    margin: 50px auto; /* Adds spacing and centers the container */
+}
+
+/* ===== MAIN HEADING (YOUR NAME) ===== */
+h1 {
+    font-size: 48px; /* Makes the title text large */
+    font-weight: bold; /* Makes the text bold */
+    color: #333; /* Dark gray text color */
+}
+
+/* ===== PROFILE IMAGE STYLING ===== */
 .profile-img {
-    width: 200px;
-    border-radius: 50%;
-    display: block;
-    margin: 20px auto;
+    width: 250px; /* Increases the image size */
+    border-radius: 50%; /* Makes the image circular */
+    display: block; /* Ensures the image is centered */
+    margin: 20px auto; /* Adds spacing around the image */
+    border: 5px solid #007bff; /* Adds a blue border */
 }
 
-/* Style for Resume Button */
+/* ===== RESUME BUTTON STYLING ===== */
 .resume-button {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    font-size: 1.2em;
-    border-radius: 10px;
-    margin-top: 20px;
-    text-align: center;
+    display: inline-block; /* Makes it a clickable box */
+    padding: 15px 30px; /* Adds space inside the button */
+    background-color: #28a745; /* Sets the background to green */
+    color: white; /* Makes text color white */
+    text-decoration: none; /* Removes default link underline */
+    font-size: 1.2em; /* Increases font size */
+    font-weight: bold; /* Makes text bold */
+    border-radius: 8px; /* Rounds the corners */
+    margin-top: 20px; /* Adds space above the button */
+    transition: 0.3s; /* Smooth hover effect */
 }
 
 .resume-button:hover {
-    background-color: #0056b3;
+    background-color: #218838; /* Darkens the button color when hovered */
 }
+
+
+
