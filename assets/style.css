@@ -1,7 +1,7 @@
 /* ===== NAVIGATION BAR STYLES ===== */
 /* ===== NAVIGATION BAR (FULL-WIDTH RIBBON, LINKS SPACED EVENLY) ===== */
 nav {
-    background-color: #007bff; /* Blue background */
+    background-color: transparent; /* Blue background */
     padding: 40px 0; /* Vertical padding */
     width: 100%; /* Full width */
     position: fixed; /* Fix it to the top of the page */
@@ -28,7 +28,7 @@ nav li {
 
 /* Styles each navigation link */
 nav a {
-    color: white;
+    color: #333; 
     text-decoration: none;
     font-size: 1.5em;
     font-weight: bold;
