@@ -1,21 +1,44 @@
 /* ===== NAVIGATION BAR STYLES ===== */
+/* ===== NAVIGATION BAR (FULL-WIDTH RIBBON, LINKS SPACED EVENLY) ===== */
 nav {
-    background-color: #007bff; /* Sets the background color to blue */
-    padding: 15px; /* Adds padding to space out content */
-    text-align: center; /* Centers the navigation links */
+    background-color: #007bff; /* Blue background */
+    padding: 15px 0; /* Vertical padding */
+    width: 100%; /* Full width */
+    position: fixed; /* Fix it to the top of the page */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensures it stays on top */
 }
 
+/* Flexbox to spread links evenly */
+nav ul {
+    list-style: none; /* Removes bullets */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Enables flexbox */
+    justify-content: space-evenly; /* Evenly spaces links */
+    align-items: center; /* Aligns links vertically */
+}
+
+/* Removes bullet points and ensures even spacing */
+nav li {
+    display: inline;
+}
+
+/* Styles each navigation link */
 nav a {
-    color: white; /* Makes text color white */
-    text-decoration: none; /* Removes the underline from links */
-    font-size: 1.2em; /* Increases font size */
-    margin: 0 20px; /* Spaces out the navigation links */
-    font-weight: bold; /* Makes text bold */
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px 20px; /* Adds clickable space */
+    transition: 0.3s ease-in-out;
 }
 
 nav a:hover {
-    text-decoration: underline; /* Adds underline effect when hovered */
+    text-decoration: underline; /* Underline on hover */
 }
+
 
 /* ===== CONTAINER STYLES (CENTERS CONTENT) ===== */
 .container {
