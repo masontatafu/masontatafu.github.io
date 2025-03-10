@@ -18,6 +18,7 @@ nav ul {
     display: flex; /* Enables flexbox */
     justify-content: space-evenly; /* Evenly spaces links */
     align-items: center; /* Aligns links vertically */
+    height: 100%; /* ensure links align with navbar height */
 }
 
 /* Removes bullet points and ensures even spacing */
@@ -29,14 +30,15 @@ nav li {
 nav a {
     color: white;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: bold;
-    padding: 10px 20px; /* Adds clickable space */
+    padding: 20px 30px; /* Adds clickable space */
     transition: 0.3s ease-in-out;
 }
 
 nav a:hover {
     text-decoration: underline; /* Underline on hover */
+    background-color: #0056b3; /*darker blue on hover */
 }
 
 
