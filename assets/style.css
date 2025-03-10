@@ -55,7 +55,7 @@ h1 {
 }
 
 /* ===== PROFILE IMAGE STYLING ===== */
-.home-imgage {
+.home-image {
     width: 250px; /* Increases the image size */
     border-radius: 50%; /* Makes the image circular */
     display: block; /* Ensures the image is centered */
