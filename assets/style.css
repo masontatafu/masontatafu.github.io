@@ -8,6 +8,7 @@ nav {
     top: 0;
     left: 0;
     z-index: 1000; /* Ensures it stays on top */
+    border-bottom: 1px solid rgba(128,128,128,0.3); /* subtle grey line */
 }
 
 /* Flexbox to spread links evenly */
