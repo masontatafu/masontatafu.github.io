@@ -81,5 +81,10 @@ h1 {
     background-color: #218838; /* Darkens the button color when hovered */
 }
 
+/* ===== FIX NAVBAR OVERLAPPING CONTENT ===== */
+main {
+    padding-top: 60px; /* Adjust this if needed to push content down */
+}
+
 
 
