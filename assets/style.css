@@ -110,8 +110,7 @@ body {
     align-items: center; /* Centers everything vertically */
     justify-content: center;
     height: 100vh; /* Full screen height */ 
-    padding: 0 10%;
-    padding-top: 100px;
+    padding: 100px 10% 0;
 }
 
 
