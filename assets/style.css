@@ -54,13 +54,6 @@ h1 {
 }
 
 
-/* ===== CONTAINER STYLES (CENTERS CONTENT) ===== */
-.container {
-    text-align: center; /* Centers all text inside */
-    max-width: 800px; /* Limits the width of the content */
-    margin: 50px auto; /* Adds spacing and centers the container */
-}
-
 /* ===== HOME PAGE LAYOUT (TEXT LEFT, IMAGE RIGHT) ===== */
 .home-container {
     display: flex;
@@ -90,7 +83,7 @@ h1 {
 }
 
 .home-image img {
-    width: 300px; /* Adjust size */
+    width: 150px; /* Adjust size */
     border-radius: 10px;
 }
 
@@ -114,7 +107,7 @@ h1 {
 
 /* ===== FIX NAVBAR OVERLAPPING CONTENT ===== */
 main {
-    padding-top: 60px; /* Adjust this if needed to push content down */
+    padding-top: 100px; /* Adjust this if needed to push content down */
 }
 
 /* ===== STRUCTURE: TEXT LEFT, IMAGE RIGHT ===== */
