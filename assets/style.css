@@ -69,6 +69,7 @@ h1 {
     font-weight: bold;
     flex: 1;
     text-align: left;
+    padding-top: 100px; /* push text below navbar*/
 }
 
 .subheading {
