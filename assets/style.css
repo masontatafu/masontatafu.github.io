@@ -61,10 +61,7 @@ h1 {
 .home-container {
     display: flex;
     align-items: center; /* Center elements vertically */
-    justify-content: space-between; /* Space out text and image */
-    min-height: 100vh;
-    margin-top: 100px;
-    
+    justify-content: space-between; /* Space out text and image */    
 }
 
 /* Text Section */
