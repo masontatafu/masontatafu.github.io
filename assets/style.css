@@ -1,13 +1,16 @@
 /* ===== NAVIGATION BAR STYLES ===== */
 nav {
     background-color: transparent; /* Blue background */
-    padding: 40px 0; /* Vertical padding */
+    height: 80px; /* Vertical padding */
     width: 100%; /* Full width */
     position: fixed; /* Fix it to the top of the page */
     top: 0;
     left: 0;
     z-index: 1000; /* Ensures it stays on top */
     border-bottom: 1px solid rgba(128,128,128,0.3); /* subtle grey line */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Flexbox to spread links evenly */
@@ -59,7 +62,9 @@ h1 {
     display: flex;
     align-items: center; /* Center elements vertically */
     justify-content: space-between; /* Space out text and image */
-    height: 100vh; /* Full viewport height */
+    min-height: 100vh;
+    margin-top: 100px;
+    
 }
 
 /* Text Section */
@@ -110,7 +115,7 @@ body {
     align-items: center; /* Centers everything vertically */
     justify-content: center;
     height: 100vh; /* Full screen height */ 
-    padding: 100px 10% 0;
+    padding: 120px 10% 0;
 }
 
 
