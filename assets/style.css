@@ -1,6 +1,6 @@
 /* ===== NAVIGATION BAR STYLES ===== */
 nav {
-    background-color: transparent; /* Blue background */
+    background-color: white; /* Blue background */
     height: 80px; /* Vertical padding */
     width: 100%; /* Full width */
     position: fixed; /* Fix it to the top of the page */
@@ -63,7 +63,7 @@ h1 {
     align-items: center; /* Center elements vertically */
     justify-content: space-between; /* Space out text and image */
     min-height: 100vh;
-    margin-top: 100px;
+    margin-top: 80px;
     
 }
 
@@ -115,6 +115,7 @@ body {
     align-items: center; /* Centers everything vertically */
     justify-content: center;
     height: 100vh; /* Full screen height */ 
+    overflow: hidden;
 }
 
 
