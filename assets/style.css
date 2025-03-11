@@ -1,7 +1,7 @@
 /* ===== NAVIGATION BAR STYLES ===== */
 nav {
     background-color: white; /* Blue background */
-    height: 80px; /* Vertical padding */
+    height: 100px; /* Vertical padding */
     width: 100%; /* Full width */
     position: fixed; /* Fix it to the top of the page */
     top: 0;
