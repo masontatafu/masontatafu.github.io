@@ -60,7 +60,6 @@ h1 {
     align-items: center; /* Center elements vertically */
     justify-content: space-between; /* Space out text and image */
     height: 100vh; /* Full viewport height */
-    padding: 0 10%;
 }
 
 /* Text Section */
@@ -69,7 +68,6 @@ h1 {
     font-weight: bold;
     flex: 1;
     text-align: left;
-    padding-top: 100px; /* push text below navbar*/
 }
 
 .subheading {
@@ -106,10 +104,6 @@ h1 {
     background-color: #0056b3;
 }
 
-/* ===== FIX NAVBAR OVERLAPPING CONTENT ===== */
-main {
-    padding-top: 100px; /* Adjust this if needed to push content down */
-}
 
 /* ===== STRUCTURE: TEXT LEFT, IMAGE RIGHT ===== */
 body {
@@ -117,6 +111,7 @@ body {
     justify-content: center;
     height: 100vh; /* Full screen height */ 
     padding: 0 10%;
+    padding-top: 100px;
 }
 
 
