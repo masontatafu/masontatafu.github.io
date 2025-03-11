@@ -1,5 +1,4 @@
 /* ===== NAVIGATION BAR STYLES ===== */
-/* ===== NAVIGATION BAR (FULL-WIDTH RIBBON, LINKS SPACED EVENLY) ===== */
 nav {
     background-color: transparent; /* Blue background */
     padding: 40px 0; /* Vertical padding */
@@ -43,12 +42,9 @@ nav a:hover {
 }
 
 
-/* ===== CONTAINER STYLES (CENTERS CONTENT) ===== */
-.container {
-    text-align: center; /* Centers all text inside */
-    max-width: 800px; /* Limits the width of the content */
-    margin: 50px auto; /* Adds spacing and centers the container */
-}
+/* ==================================================================================================================================== */
+
+
 
 /* ===== MAIN HEADING (YOUR NAME) ===== */
 h1 {
@@ -57,13 +53,34 @@ h1 {
     color: #333; /* Dark gray text color */
 }
 
-/* ===== PROFILE IMAGE STYLING ===== */
-.home-image {
-    width: 250px; /* Increases the image size */
-    border-radius: 50%; /* Makes the image circular */
-    display: block; /* Ensures the image is centered */
-    margin: 20px auto; /* Adds spacing around the image */
-    border: 5px solid #007bff; /* Adds a blue border */
+
+/* ===== CONTAINER STYLES (CENTERS CONTENT) ===== */
+.container {
+    text-align: center; /* Centers all text inside */
+    max-width: 800px; /* Limits the width of the content */
+    margin: 50px auto; /* Adds spacing and centers the container */
+}
+
+/* ===== HOME PAGE LAYOUT (TEXT LEFT, IMAGE RIGHT) ===== */
+.home-container {
+    display: flex;
+    align-items: center; /* Center elements vertically */
+    justify-content: space-between; /* Space out text and image */
+    height: 100vh; /* Full viewport height */
+    padding: 0 10%;
+}
+
+/* Text Section */
+.home-text {
+    font-size: 4rem; /* Very large text */
+    font-weight: bold;
+    flex: 1;
+    text-align: left;
+}
+
+.subheading {
+    font-size: 2rem;
+    color: #666;
 }
 
 /* Image Section */
@@ -79,10 +96,8 @@ h1 {
 
 /* Resume Button at Bottom */
 .resume-button {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    display: inline-block;
+    margin-top: 30px; /* to center the button horizontally*/
     padding: 15px 30px;
     background-color: #007bff;
     color: white;
@@ -104,26 +119,13 @@ main {
 
 /* ===== STRUCTURE: TEXT LEFT, IMAGE RIGHT ===== */
 body {
-    display: flex;
     align-items: center; /* Centers everything vertically */
     justify-content: center;
-    height: 100vh; /* Full screen height */
-    flex-direction: row; /* Text on left, image on right */
+    height: 100vh; /* Full screen height */ 
     padding: 0 10%;
 }
 
-/* Text Section */
-.home-text {
-    font-size: 4rem; /* Very large text */
-    font-weight: bold;
-    flex: 1;
-    text-align: left;
-}
 
-.subheading {
-    font-size: 2rem;
-    color: #666;
-}
 
 
 
