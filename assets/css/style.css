@@ -83,6 +83,8 @@ main {
 .subheading {
     font-size: 2rem;
     color: #666;
+    text-align: center;
+    margin-top: 10px;
 }
 
 /* Image Section */
