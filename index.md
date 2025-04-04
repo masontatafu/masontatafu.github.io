@@ -3,9 +3,6 @@ title: "Home"
 layout: default
 ---
 
-
-<div class = "top-section">
-
   
 # Hello, I'm Mason Tatafu
 {:.home-text}
@@ -13,15 +10,13 @@ layout: default
 Welcome to my portfolio.
 {:.subheading}
 
-</div>
+[Resume](Mason%20Tatafu%20Current%20Resume%20-%202025.pdf)
+{:.box-link}
 
-<div class="box-section">
-  <a href="Mason%20Tatafu%20Current%20Resume%20-%202025.pdf" class="box-link">Resume</a>
-  <a href="/about" class="box-link">About</a>
-  <a href="/projects" class="box-link">Projects</a>
-</div>
+[About Me](/about)
+{:.box-link}
+
+[Projects](/projects)
+{:.box-link}
 
 
-  
-[View My Resume](Mason%20Tatafu%20Current%20Resume%20-%202025.pdf){:.resume-button}
-  
