@@ -133,8 +133,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 70vh; /* Takes up 70% of screen height */
-    padding-top: 40px; /* Push slightly upward */
+    min-height: 50vh; /* Takes up 70% of screen height */
+    padding-top: 20px; /* Push slightly upward */
 }
 
 /* ====== making large clickable boxes ====== */
@@ -142,25 +142,28 @@ body {
     display: flex;
     justify-content: center;
     gap: 30px;
-    margin-top: 20px;
+    margin-top: 40px;
     flex-wrap: wrap;
+    padding: 0 20px;
 }
 
 .box-link {
-    width: 200px;
-    height: 150px;
-    background-color: #007bff;
+    width: 220px;
+    height: 160px;
+    background: linear-gradient(145deg, #007bff, #0056b3);
     color: white;
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 1.4rem;
+    font-weight: 600;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 20px;
     text-decoration: none;
-    transition: background-color 0.3s;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .box-link:hover {
-    background-color: #0056b3;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
 }
