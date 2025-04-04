@@ -7,11 +7,11 @@ layout: default
 <div class = "top-section">
 
   
-  # Hello, I'm Mason Tatafu
-  {:.home-text}
+# Hello, I'm Mason Tatafu
+{:.home-text}
     
-  Welcome to my portfolio.
-  {:.subheading}
+Welcome to my portfolio.
+{:.subheading}
 
 </div>
 
