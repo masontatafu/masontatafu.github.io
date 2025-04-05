@@ -345,8 +345,8 @@ body {
 .project-card {
     display: inline-block;
     vertical-align: top;
-    width: calc(50% - 40px);
-    margin: 20px;
+    width: calc(48% - 40px);
+    margin: 10px;
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 15px;
@@ -362,7 +362,7 @@ body {
     margin: 0.5em 0;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .project-card {
         width: 100%;
         margin: 15px 0;
