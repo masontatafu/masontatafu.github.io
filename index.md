@@ -15,7 +15,7 @@ Welcome to my portfolio.
 [Resume](Mason%20Tatafu%20Current%20Resume%20-%202025.pdf){:.box-link}
 [About Me](/about){:.box-link}
 [Projects](/projects){:.box-link}
-{:.box-container}
+{:.box-section}
 
 
 
