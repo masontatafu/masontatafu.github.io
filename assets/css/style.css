@@ -189,3 +189,36 @@ body {
     display: block;
 }
 
+
+/* == about page == */
+
+.page-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.about-header {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.about-section {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.profile-pic {
+    display: block;
+    max-width: 200px;
+    border-radius: 100%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+
