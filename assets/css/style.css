@@ -177,10 +177,10 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 200px;
-    pointer-events: none; /* don't interfere with clicking links */
+    height: 220px;
+    pointer-events: none;
     z-index: 0;
-    overflow: hidden;
+    background: none; /* keep background clear if needed */
 }
 
 #stickCanvas {
