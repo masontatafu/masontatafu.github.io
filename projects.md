@@ -27,3 +27,43 @@ Technologies: HTML, CSS, JavaScript
 Short description of what this project does.  
 Technologies: API, ASP.NET MVC  
 {:.project-card}
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: HTML, CSS, JavaScript  
+{:.project-card}
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: API, ASP.NET MVC  
+{:.project-card}
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: HTML, CSS, JavaScript  
+{:.project-card}
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: API, ASP.NET MVC  
+{:.project-card}
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: HTML, CSS, JavaScript  
+{:.project-card}
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: API, ASP.NET MVC  
+{:.project-card}
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: HTML, CSS, JavaScript  
+{:.project-card}
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: API, ASP.NET MVC  
+{:.project-card}
