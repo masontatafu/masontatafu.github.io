@@ -27,6 +27,6 @@ Feel free to reach out through any of the methods below.
 ## 🌐 Socials
 {:.contact-section}
 
-- [LinkedIn](https://www.linkedin.com/in/yournamehere)  
+- [LinkedIn](https://www.linkedin.com/in/mason-tatafu-91b0742a2)  
 - [GitHub](https://github.com/masontatafu)  
-- [Instagram](https://instagram.com/yourhandle) *(optional)*  
+- [Instagram](https://instagram.com/masontatafu) 
