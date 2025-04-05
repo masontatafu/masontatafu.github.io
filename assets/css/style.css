@@ -222,3 +222,42 @@ body {
 }
 
 
+
+/* SKILLS PAGE */
+.page-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.skills-section {
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.skill-tag {
+    background-color: #f0f0f0;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    background-color: #007bff;
+    color: white;
+    transform: translateY(-2px);
+}
