@@ -9,9 +9,7 @@ layout: default
 ## Let's Connect
 {:.contact-header}
 
-Whether you want to collaborate, connect, or just say hey — I'm always open to conversation.  
-Feel free to reach out through any of the methods below.
-{:.contact-intro}
+Whether you want to collaborate, work together, or just say hey — I’m always open to a good conversation.
 
 ---
 
@@ -24,9 +22,9 @@ Feel free to reach out through any of the methods below.
 
 ---
 
-## 🌐 Socials
+## 🌐 Social Links
 {:.contact-section}
 
-- [LinkedIn](https://www.linkedin.com/in/mason-tatafu-91b0742a2)  
 - [GitHub](https://github.com/masontatafu)  
-- [Instagram](https://instagram.com/masontatafu) 
+- [LinkedIn](https://www.linkedin.com/in/mason-tatafu-91b0742a2)
+- [Instagram](https://www.instagram.com/masontatafu)
