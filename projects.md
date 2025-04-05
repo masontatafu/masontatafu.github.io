@@ -1,3 +1,29 @@
 ---
-title: This is where I'll showcase my projects
+title: "Projects"
+layout: default
 ---
+
+# Projects
+{:.page-title}
+
+Explore a selection of projects that highlight my skills in development, data, and design. Real functionality, clean logic, and user-centered outcomes.
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: C#, .NET, GUI  
+{:.project-card}
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: Python, Matplotlib  
+{:.project-card}
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: HTML, CSS, JavaScript  
+{:.project-card}
+
+### 🚧 Project Title
+Short description of what this project does.  
+Technologies: API, ASP.NET MVC  
+{:.project-card}
