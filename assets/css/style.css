@@ -261,3 +261,29 @@ body {
     color: white;
     transform: translateY(-2px);
 }
+
+
+/* CONTACT PAGE */
+.contact-header {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.contact-intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.contact-section {
+    max-width: 600px;
+    margin: 0 auto 60px auto;
+    font-size: 1.2rem;
+    line-height: 2;
+    text-align: center;
+}
+
