@@ -124,10 +124,13 @@ main {
 
 /* ===== STRUCTURE: TEXT LEFT, IMAGE RIGHT ===== */
 body {
-    align-items: center; /* Centers everything vertically */
-    justify-content: center;
-    height: 100vh; /* Full screen height */ 
-    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
 }
 
 
