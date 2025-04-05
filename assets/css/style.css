@@ -171,3 +171,21 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
 }
+
+
+#animation-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    pointer-events: none; /* don't interfere with clicking links */
+    z-index: 0;
+    overflow: hidden;
+}
+
+#stickCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
