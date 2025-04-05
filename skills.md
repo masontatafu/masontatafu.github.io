@@ -11,21 +11,25 @@ layout: default
 ## 💻 Technical Skills
 {:.skills-section}
 
+I enjoy building systems that are clean under the hood — not just on the surface. Here are some of the tools and technologies I’ve worked with:
+
 <div class="skills-grid">
 <span class="skill-tag">Python</span>
 <span class="skill-tag">Java</span>
 <span class="skill-tag">SQL</span>
 <span class="skill-tag">HTML/CSS</span>
-<span class="skill-tag">Web App Development</span>
+<span class="skill-tag">Web Development</span>
 <span class="skill-tag">Database Design</span>
-<span class="skill-tag">Cybersecurity Fundamentals</span>
+<span class="skill-tag">Cybersecurity</span>
 <span class="skill-tag">System Analysis</span>
 </div>
 
 ---
 
-## 🧰 Tools & Technologies
+## 🧰 Tools & Platforms
 {:.skills-section}
+
+I’m comfortable working with a variety of platforms and workflows:
 
 <div class="skills-grid">
 <span class="skill-tag">VS Code</span>
@@ -39,6 +43,8 @@ layout: default
 
 ## 🤝 Soft Skills
 {:.skills-section}
+
+Being a student-athlete, team player, and tech collaborator has taught me to balance people and projects:
 
 <div class="skills-grid">
 <span class="skill-tag">Leadership</span>
