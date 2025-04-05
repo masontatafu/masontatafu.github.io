@@ -1,83 +1,216 @@
+/* ===== NAVIGATION BAR STYLES ===== */
+nav {
+    background-color: white; /* Blue background */
+    height: 100px; /* Vertical padding */
+    width: 100%; /* Full width */
+    position: fixed; /* Fix it to the top of the page */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensures it stays on top */
+    border-bottom: 1px solid rgba(128,128,128,0.3); /* subtle grey line */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-/* ========== Global Resets and Base Layout ========== */
-body {
+/* Flexbox to spread links evenly */
+nav ul {
+    list-style: none; /* Removes bullets */
+    padding: 0;
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fff;
-    color: #333;
-    line-height: 1.6;
+    display: flex; /* Enables flexbox */
+    justify-content: space-evenly; /* Evenly spaces links */
+    align-items: center; /* Aligns links vertically */
+    height: 100%; /* ensure links align with navbar height */
+}
+
+/* Removes bullet points and ensures even spacing */
+nav li {
+    display: inline;
+}
+
+/* Styles each navigation link */
+nav a {
+    color: #333; 
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 20px 30px; /* Adds clickable space */
+    transition: 0.3s ease-in-out;
+}
+
+nav a:hover {
+    text-decoration: underline; /* Underline on hover */
+    background-color: #0056b3; /*darker blue on hover */
+}
+
+
+/* ==================================================================================================================================== */
+
+
+
+/* ===== MAIN HEADING (YOUR NAME) ===== */
+h1 {
+    font-size: 48px; /* Makes the title text large */
+    font-weight: bold; /* Makes the text bold */
+    color: #333; /* Dark gray text color */
 }
 
 main {
-    padding: 120px 20px 60px; /* accounts for navbar height */
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* ========== Navigation ========== */
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+
+
+/* ===== HOME PAGE LAYOUT (TEXT LEFT, IMAGE RIGHT) ===== */
+.home-container {
+    display: flex;
+    align-items: center; /* Center elements vertically */
+    justify-content: space-between; /* Space out text and image */    
 }
 
-nav ul {
-    list-style: none;
+/* Text Section */
+.home-text {
+    font-size: 4rem; /* Very large text */
+    font-weight: bold;
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    
+}
+
+.subheading {
+    font-size: 2rem;
+    color: #666;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Image Section */
+.home-image {
+    flex: 1;
+    text-align: right;
+}
+
+.home-image img {
+    width: 150px; /* Adjust size */
+    border-radius: 10px;
+}
+
+/* Resume Button at Bottom */
+.resume-button {
+    display: inline-block;
+    margin-top: 30px; /* to center the button horizontally*/
+    padding: 15px 30px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.resume-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* ===== STRUCTURE: TEXT LEFT, IMAGE RIGHT ===== */
+body {
+    align-items: center; /* Centers everything vertically */
+    justify-content: center;
+    height: 100vh; /* Full screen height */ 
+    overflow: hidden;
+}
+
+
+.top-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh; /* Takes up 70% of screen height */
+    padding-top: 20px; /* Push slightly upward */
+}
+
+/* ====== making large clickable boxes ====== */
+.box-section {
     display: flex;
     justify-content: center;
-    padding: 10px 0;
-    margin: 0;
-    gap: 40px;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    padding: 0 20px;
 }
 
-nav li a {
+.box-link {
+    display: inline-block;
+    margin: 20px;
+    width: 220px;
+    height: 160px;
+    background: linear-gradient(145deg, #007bff, #0056b3);
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 160px;
+    border-radius: 20px;
     text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-nav li a:hover {
-    color: #007bff;
+.box-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* ========== Page Title (used across all pages) ========== */
+
+#animation-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 220px;
+    pointer-events: none;
+    z-index: 0;
+    background: none; /* keep background clear if needed */
+}
+
+#stickCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+
+/* == about page == */
+
 .page-title {
     text-align: center;
     font-size: 3rem;
     font-weight: bold;
-    margin-bottom: 50px;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
+    margin-bottom: 30px;
 }
 
-/* ========== About Page ========== */
 .about-header {
     text-align: center;
     font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .about-section {
-    max-width: 800px;
-    margin: 0 auto 80px auto;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
     font-size: 1.2rem;
     line-height: 1.6;
-    text-align: center;
-    position: relative;
-}
-
-.about-section::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: #007bff;
-    margin: 20px auto 0;
-    border-radius: 2px;
 }
 
 .profile-pic {
@@ -88,56 +221,49 @@ nav li a:hover {
     box-shadow: 0 0 10px rgba(0,0,0,0.15);
 }
 
-/* ========== Skills Page ========== */
-.skills-section {
-    max-width: 800px;
-    margin: 0 auto 80px auto;
-    font-size: 1.2rem;
-    line-height: 1.6;
+
+
+/* SKILLS PAGE */
+.page-title {
     text-align: center;
-    position: relative;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 40px;
 }
 
-.skills-section::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: #007bff;
-    margin: 20px auto 0;
-    border-radius: 2px;
+.skills-section {
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    font-size: 1.2rem;
+    text-align: center;
 }
 
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .skill-tag {
-    background-color: #f9f9f9;
-    padding: 12px 24px;
-    border-radius: 30px;
-    font-size: 1.05rem;
+    background-color: #f0f0f0;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 1rem;
     font-weight: 500;
-    color: #333;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
-    cursor: default;
-    opacity: 0;
-    animation: fadeIn 0.5s ease forwards;
 }
 
 .skill-tag:hover {
     background-color: #007bff;
     color: white;
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 10px 20px rgba(0,123,255,0.2);
+    transform: translateY(-2px);
 }
 
-/* ========== Contact Page ========== */
+
+/* CONTACT PAGE */
 .contact-header {
     text-align: center;
     font-size: 2rem;
@@ -161,41 +287,3 @@ nav li a:hover {
     text-align: center;
 }
 
-.contact-section::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: #007bff;
-    margin: 20px auto 0;
-    border-radius: 2px;
-}
-
-/* ========== Animation (used in skills tags) ========== */
-@keyframes fadeIn {
-    from {
-        transform: translateY(10px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* ========== Stick Figure Animation Canvas ========== */
-#animation-container {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 220px;
-    pointer-events: none;
-    z-index: 0;
-    background: none;
-}
-
-#stickCanvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
