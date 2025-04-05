@@ -2,94 +2,143 @@ const canvas = document.getElementById("stickCanvas");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
-canvas.height = 200;
+canvas.height = 250;
 
-let x = 50;
-let dx = 2;
-let legFrame = 0;
-let ballX = 100;
-let ballDX = 0;
+// Constants
+const gravity = 0.5;
+const damping = 0.7;
+const groundY = 200;
+const stepLength = 8;
+const runSpeed = 2;
+const ballRadius = 7;
 
-// Draw stick figure with running legs
-function drawStickFigure(xPos, legFrame) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+// Stick figure state
+let direction = 1; // 1 for right, -1 for left
+let time = 0;
+let runnerX = 100;
 
-    // Ground line
+// Ball state
+let ballX = 200;
+let ballY = groundY - ballRadius;
+let ballVX = 3;
+let ballVY = 0;
+
+function drawLimb(x1, y1, length, angle) {
+    const x2 = x1 + length * Math.cos(angle);
+    const y2 = y1 + length * Math.sin(angle);
     ctx.beginPath();
-    ctx.moveTo(0, 130);
-    ctx.lineTo(canvas.width, 130);
-    ctx.strokeStyle = "#999";
-    ctx.lineWidth = 1;
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
     ctx.stroke();
+    return [x2, y2];
+}
+
+function drawStickFigure(x, t, facingRight = true) {
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 2;
 
     // Head
     ctx.beginPath();
-    ctx.arc(xPos, 60, 10, 0, Math.PI * 2);
+    ctx.arc(x, groundY - 100, 10, 0, Math.PI * 2);
     ctx.stroke();
 
-    // Body
+    // Torso
+    const hipX = x;
+    const hipY = groundY - 60;
+    const shoulderX = x;
+    const shoulderY = groundY - 90;
     ctx.beginPath();
-    ctx.moveTo(xPos, 70);
-    ctx.lineTo(xPos, 100);
+    ctx.moveTo(shoulderX, shoulderY);
+    ctx.lineTo(hipX, hipY);
     ctx.stroke();
 
     // Arms
-    ctx.beginPath();
-    ctx.moveTo(xPos - 10, 85);
-    ctx.lineTo(xPos + 10, 85);
-    ctx.stroke();
+    let armSwing = Math.sin(t / 5) * 0.5;
+    if (!facingRight) armSwing *= -1;
+    let [elbowX, elbowY] = drawLimb(shoulderX, shoulderY, 15, armSwing + (facingRight ? 0 : Math.PI));
+    drawLimb(elbowX, elbowY, 15, armSwing + 0.5 + (facingRight ? 0 : Math.PI));
 
-    // Legs (alternate every frame for running effect)
-    ctx.beginPath();
-    if (legFrame % 20 < 10) {
-        ctx.moveTo(xPos, 100);
-        ctx.lineTo(xPos - 10, 120);
-        ctx.moveTo(xPos, 100);
-        ctx.lineTo(xPos + 10, 115);
-    } else {
-        ctx.moveTo(xPos, 100);
-        ctx.lineTo(xPos - 10, 115);
-        ctx.moveTo(xPos, 100);
-        ctx.lineTo(xPos + 10, 120);
-    }
-    ctx.stroke();
-
-    // Draw soccer ball
-    ctx.beginPath();
-    ctx.arc(ballX, 122, 5, 0, Math.PI * 2);
-    ctx.fillStyle = "black";
-    ctx.fill();
+    // Legs
+    let legSwing = Math.sin(t / 5 + Math.PI) * 0.5;
+    if (!facingRight) legSwing *= -1;
+    let [kneeX, kneeY] = drawLimb(hipX, hipY, 20, legSwing + (facingRight ? 0 : Math.PI));
+    drawLimb(kneeX, kneeY, 20, legSwing + 0.5 + (facingRight ? 0 : Math.PI));
 }
 
-// Animate both figure and ball
+function updateBall() {
+    ballVY += gravity;
+    ballY += ballVY;
+    ballX += ballVX;
+
+    // Bounce
+    if (ballY + ballRadius > groundY) {
+        ballY = groundY - ballRadius;
+        ballVY *= -damping;
+    }
+
+    // Wall bounce
+    if (ballX < ballRadius || ballX > canvas.width - ballRadius) {
+        ballVX *= -1;
+        ballX = Math.max(ballRadius, Math.min(canvas.width - ballRadius, ballX));
+    }
+}
+
+function maybeKickBall() {
+    const footX = runnerX + direction * 10;
+    const dx = ballX - footX;
+    const dy = ballY - (groundY - 20);
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    if (dist < 15) {
+        // Kick with some force
+        ballVX = direction * (3 + Math.random() * 2);
+        ballVY = -5 - Math.random() * 2;
+    }
+}
+
+function updateRunner() {
+    runnerX += direction * runSpeed;
+
+    // Turn around when hitting the edge or chasing ball
+    if ((direction === 1 && runnerX > ballX) || (direction === -1 && runnerX < ballX)) {
+        // Do nothing
+    } else {
+        direction *= -1;
+    }
+
+    // Turn around if runner is too close to canvas edge
+    if (runnerX < 30 || runnerX > canvas.width - 30) {
+        direction *= -1;
+    }
+}
+
 function animate() {
-    drawStickFigure(x, legFrame);
-    x += dx;
-    legFrame++;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // When figure reaches ball, kick it
-    if (Math.abs(x - ballX) < 12 && ballDX === 0) {
-        ballDX = 3; // kick!
-    }
+    // Draw ground
+    ctx.strokeStyle = "#aaa";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, groundY);
+    ctx.lineTo(canvas.width, groundY);
+    ctx.stroke();
 
-    // Move ball if it's kicked
-    if (ballDX > 0) {
-        ballX += ballDX;
-        if (ballX > canvas.width - 10) {
-            ballX = 50;     // reset ball
-            ballDX = 0;
-        }
-    }
+    // Update
+    updateBall();
+    updateRunner();
+    maybeKickBall();
 
-    // Stick figure bounce off edge
-    if (x > canvas.width - 20) {
-        x = 50;
-        ballX = 100;
-        ballDX = 0;
-    }
+    // Draw
+    drawStickFigure(runnerX, time, direction === 1);
 
+    // Draw ball
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+    ctx.fillStyle = "black";
+    ctx.fill();
+
+    time++;
     requestAnimationFrame(animate);
 }
 
 animate();
-
