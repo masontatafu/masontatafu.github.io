@@ -195,45 +195,56 @@ body {
 
 /* == about page == */
 
+/* Page title at the top of about.md */
 .page-title {
     text-align: center;
-    font-size: 3rem;
-    font-weight: bold;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-top: 40px;
     margin-bottom: 30px;
+    color: #222;
 }
 
+/* Section headers (e.g., Career Goals, Education) */
 .about-header {
-    text-align: center;
-    font-size: 2rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    margin-bottom: 30px;
+    color: #333;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-left: 4px solid #1a73e8;
+    padding-left: 12px;
 }
 
+/* Paragraph or section body text */
 .about-section {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.7;
     max-width: 800px;
-    margin: 0 auto 80px auto;
-    font-size: 1.2rem;
-    line-height: 1.6;
-    text-align: center;
-    position: relative;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
 }
 
-.about-section::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: #007bff;
-    margin: 20px auto 0;
-    border-radius: 2px;
-}
-
+/* Image styling for profile pic */
 .profile-pic {
     display: block;
-    max-width: 200px;
-    border-radius: 100%;
-    margin: 0 auto;
-    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    max-width: 180px;
+    border-radius: 50%;
+    margin: 30px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Contact links */
+.about-section a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+.about-section a:hover {
+    text-decoration: underline;
 }
 
 
