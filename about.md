@@ -3,13 +3,14 @@ title: "About Me"
 layout: default
 ---
 
+{: .intro-wrapper}
 ![Mason Tatafu](/assets/images/IMG_5131.jpg){:.intro-pic}
 
 
-{: .intro-wrapper}
+
 ## Hi, I'm Mason
 I'm a student-athlete and aspiring IT professional with roots in Australia and current base in Louisville. I’m wrapping up my degree in Computer Information Systems at the University of Louisville, while continuing my soccer career in the NCAA and USL2. Off the field, I'm all about building things — especially digital ones — that make life smoother, smarter, or just more fun.
-
+{:}
 
 ## 🎯 Career Goals
 {:.about-header}
