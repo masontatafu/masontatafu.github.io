@@ -250,6 +250,20 @@ body {
     text-decoration: underline;
 }
 
+.intro-pic {
+    float: left;
+    width: 140px;
+    height: 140px;
+    margin: 0 25px 20px 0;
+    border-radius: 30% / 20%;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.about-section {
+    overflow: hidden; /* ensures float doesn't break layout */
+}
+
 
 /* SKILLS PAGE */
 .page-title {
