@@ -275,6 +275,19 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
+/* Wrapper around intro text */
+.intro-wrapper {
+  overflow: hidden;
+  max-width: 850px;
+  margin: 0 auto 40px auto;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  line-height: 1.7;
+  font-size: 1rem;
+  color: #444;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
 
 
 /* SKILLS PAGE */
