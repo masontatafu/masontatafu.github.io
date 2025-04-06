@@ -253,12 +253,12 @@ body {
 /* Floated squircle intro image */
 .intro-pic {
     float: left;
-    width: 140px;
-    height: 140px;
-    margin: 5px 25px 20px 0;
+    width: 220px; /* Larger image */
+    height: 220px;
+    margin: 10px 30px 20px 0;
     border-radius: 30% / 20%;
     object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Intro block wraps around image */
@@ -277,16 +277,16 @@ body {
 
 /* Wrapper around intro text */
 .intro-wrapper {
-  overflow: hidden;
-  max-width: 850px;
+  overflow: hidden; /* Forces text to wrap beside image */
+  max-width: 900px;
   margin: 0 auto 40px auto;
   background-color: #f8f9fa;
-  padding: 20px;
-  border-radius: 12px;
-  line-height: 1.7;
-  font-size: 1rem;
-  color: #444;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  border-radius: 14px;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: #333;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
 }
 
 
