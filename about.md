@@ -3,9 +3,6 @@ title: "About Me"
 layout: default
 ---
 
-# About Me
-{:.page-title}
-
 ## Hey, I’m Mason.
 {:.about-header}
 
@@ -23,9 +20,11 @@ My goal is to merge my competitive mindset with tech. I’m working toward a car
 
 **University of Louisville** – B.S. in Computer Information Systems  
 *2023 – 2025 (Web Dev & Cybersecurity Track)*
+{:.about-section}
 
 **Hofstra University** – B.S. in Computer Science  
 *2021 – 2023*
+{:.about-section}
 
 **Trinity College, Perth** – High School Diploma  
 *Graduated 2020*
