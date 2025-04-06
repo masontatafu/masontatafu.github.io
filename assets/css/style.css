@@ -250,19 +250,31 @@ body {
     text-decoration: underline;
 }
 
+/* Floated squircle intro image */
 .intro-pic {
     float: left;
     width: 140px;
     height: 140px;
-    margin: 0 25px 20px 0;
+    margin: 5px 25px 20px 0;
     border-radius: 30% / 20%;
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.about-section {
-    overflow: hidden; /* ensures float doesn't break layout */
+/* Intro block wraps around image */
+.intro-block {
+    overflow: hidden;
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.7;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 850px;
+    margin: 0 auto 30px auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
+
 
 
 /* SKILLS PAGE */
