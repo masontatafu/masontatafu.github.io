@@ -21,7 +21,7 @@ My goal is to merge my competitive mindset with tech. I’m working toward a car
 ---
 
 ## 🎓 Education
-{:.about-section}
+{:.about-header}
 
 - **University of Louisville** – B.S. in Computer Information Systems  
   *2023 – 2025 (Web Dev & Cybersecurity Track)*  
@@ -29,30 +29,29 @@ My goal is to merge my competitive mindset with tech. I’m working toward a car
   *2021 – 2023*  
 - **Trinity College, Perth** – High School Diploma  
   *Graduated 2020*
-
+{:.about-section}
 ---
 
 ## ⚡ Fun Facts & Hobbies
-{:.about-section}
+{:.about-header}
 
 - Former A-League player with Perth Glory and Asian Champions League experience
 - NCAA D1 athlete at two universities
 - USL2 Top 10 Prospect in 2022
 - Into animation, coding side projects, and FIFA
 - Occasionally drops a freestyle rap for fun 🎤
-
----
-
-## 🖼️
 {:.about-section}
 
-![Mason Tatafu](/assets/images/IMG_5131.jpg){:.profile-pic}
+
+![Mason Tatafu](/assets/images/IMG_5131.jpg)
+{:.profile-pic}
 
 ---
 
 ## 📬 Contact Me
-{:.about-section}
+{:.about-header}
 
 📧 masontatafu9@gmail.com  
 📍 Louisville, KY  
 🔗 [Resume](Mason%20Tatafu%20Current%20Resume%20-%202025.pdf)  
+{:.about-section}
