@@ -216,19 +216,22 @@ body {
     padding-left: 12px;
 }
 
-/* Paragraph or section body text */
+/* Boxed content area below each header */
 .about-section {
     font-size: 1rem;
     color: #444;
     line-height: 1.7;
     max-width: 800px;
-    margin-bottom: 25px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
 }
 
-/* Image styling for profile pic */
+/* Profile picture */
 .profile-pic {
     display: block;
     max-width: 180px;
@@ -246,7 +249,6 @@ body {
 .about-section a:hover {
     text-decoration: underline;
 }
-
 
 
 /* SKILLS PAGE */
