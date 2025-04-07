@@ -347,37 +347,55 @@ body {
 }
 
 /* CONTACT PAGE */
+/* ===== CONTACT PAGE ===== */
+
+.contact-container {
+    max-width: 850px;
+    margin: 0 auto 60px auto;
+    background-color: #f0f8ff; /* slightly unique soft blue-tinted background */
+    border-radius: 16px;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.07);
+    padding: 30px;
+    font-size: 1.05rem;
+    color: #333;
+    line-height: 1.8;
+    overflow: hidden;
+}
+
 .contact-header {
-    text-align: center;
     font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-weight: 700;
+    color: #1a73e8;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 .contact-intro {
     text-align: center;
-    max-width: 600px;
-    margin: 0 auto 40px auto;
-    font-size: 1.2rem;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 25px auto;
+    color: #555;
 }
 
-.contact-section {
-    max-width: 600px;
-    margin: 0 auto 60px auto;
-    font-size: 1.2rem;
-    line-height: 2;
+.contact-links {
     text-align: center;
+    margin-top: 30px;
 }
 
-.contact-section::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: #007bff;
-    margin: 20px auto 0;
-    border-radius: 2px;
+.contact-links a {
+    display: inline-block;
+    margin: 10px 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #007bff;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s ease;
+}
+
+.contact-links a:hover {
+    border-color: #007bff;
 }
 
 @keyframes fadeIn {
