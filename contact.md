@@ -9,15 +9,11 @@ layout: default
 {: .contract-intro}
 Whether you want to collaborate, work together, or just say hey — I’m always open to a good conversation.
 
----
-
 ## 📬 Contact Info
 {: .contact-links}
-- **Email:** [masontatafu9@gmail.com](mailto:masontatafu9@gmail.com)  
-- **Location:** Louisville, KY  
-- **Resume:** [Download PDF](Mason%20Tatafu%20Current%20Resume%20-%202025.pdf)
-
----
+**Email:** [masontatafu9@gmail.com](mailto:masontatafu9@gmail.com)  
+**Location:** Louisville, KY  
+**Resume:** [Download PDF](Mason%20Tatafu%20Current%20Resume%20-%202025.pdf)
 
 ## 🌐 Social Links
 {: .contact-links}
