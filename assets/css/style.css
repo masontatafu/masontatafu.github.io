@@ -438,3 +438,8 @@ body {
         margin: 15px 0;
     }
 
+main > :last-child {
+    margin-bottom: 100px;
+}
+
+    
