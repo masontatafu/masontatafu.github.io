@@ -36,12 +36,13 @@ nav a {
     font-size: 1.5em;
     font-weight: bold;
     padding: 20px 30px; /* Adds clickable space */
-    transition: 0.3s ease-in-out;
+    transition: transform 0.2s ease;
 }
 
 nav a:hover {
-    text-decoration: underline; /* Underline on hover */
-    background-color: #0056b3; /*darker blue on hover */
+    background-color: transparent; /*darker blue on hover */
+    text-decoration: none;
+    transform: scale(1.05);
 }
 
 
