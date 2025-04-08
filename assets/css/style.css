@@ -455,6 +455,6 @@ main > :last-child {
 .intro-wrapper,
 .contact-container,
 .project-card {
-    background-color: rgba(30, 144, 255, 0.1); /* transparent soft blue */
+    background-color: rgba(30, 144, 255, 0.1) !important; /* transparent soft blue */
 }
 
