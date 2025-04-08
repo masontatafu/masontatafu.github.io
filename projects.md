@@ -3,79 +3,112 @@ title: "Projects"
 layout: default
 ---
 
-# Projects
-{:.page-title}
+## Projects
+{:.about-header}
 
-Explore a selection of projects that highlight my skills in development, data, and design. Real functionality, clean logic, and user-centered outcomes.
 
-### 🚧 Project Title
+## 🚧 Project Title
+{:.about-header}
+{:.skills-section}
+
 Short description of what this project does.  
 Technologies: C#, .NET, GUI  
 {:.project-card}
+
+
+## 🚧 Project Title
+{:.about-header}
 {:.skills-section}
 
-### 🚧 Project Title
 Short description of what this project does.  
 Technologies: Python, Matplotlib  
 {:.project-card}
+
+
+## 🚧 Project Title
+{:.about-header}
 {:.skills-section}
 
-### 🚧 Project Title
 Short description of what this project does.  
 Technologies: HTML, CSS, JavaScript  
 {:.project-card}
-{:.skills-section}
 
-### 🚧 Project Title
+
+## 🚧 Project Title
+{:.about-header}
+
 Short description of what this project does.  
 Technologies: API, ASP.NET MVC  
 {:.project-card}
-{:.skills-section}
+
 
 ### 🚧 Project Title
+{:.about-header}
+{:.skills-section}
+
 Short description of what this project does.  
 Technologies: HTML, CSS, JavaScript  
 {:.project-card}
+
+
+## 🚧 Project Title
+{:.about-header}
 {:.skills-section}
 
-### 🚧 Project Title
 Short description of what this project does.  
 Technologies: API, ASP.NET MVC  
 {:.project-card}
+
+
+## 🚧 Project Title
+{:.about-header}
 {:.skills-section}
 
-### 🚧 Project Title
 Short description of what this project does.  
 Technologies: HTML, CSS, JavaScript  
 {:.project-card}
+
+
+## 🚧 Project Title
+{:.about-header}
 {:.skills-section}
 
-### 🚧 Project Title
 Short description of what this project does.  
 Technologies: API, ASP.NET MVC  
 {:.project-card}
+
+
+## 🚧 Project Title
+{:.about-header}
 {:.skills-section}
 
-### 🚧 Project Title
 Short description of what this project does.  
 Technologies: HTML, CSS, JavaScript  
 {:.project-card}
+
+
+## 🚧 Project Title
+{:.about-header}
 {:.skills-section}
 
-### 🚧 Project Title
 Short description of what this project does.  
 Technologies: API, ASP.NET MVC  
 {:.project-card}
+
+
+## 🚧 Project Title
+{:.about-header}
 {:.skills-section}
 
-### 🚧 Project Title
 Short description of what this project does.  
 Technologies: HTML, CSS, JavaScript  
 {:.project-card}
+
+
+## 🚧 Project Title
+{:.about-header}
 {:.skills-section}
 
-### 🚧 Project Title
 Short description of what this project does.  
 Technologies: API, ASP.NET MVC  
 {:.project-card}
-{:.skills-section}
