@@ -227,7 +227,7 @@ body {
     margin-right: auto;
     padding: 25px;
     background-color: rgba(26, 115, 232, 0.05);
-    border: 1.5px solid #1a73e8
+    border: 1.5px solid #1a73e8;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     margin-bottom: 30px;
@@ -329,8 +329,6 @@ body {
     gap: 15px;
     margin: 10px 0 0 0;
     max-width: 750px;
-    background-color: rgba(26,115,232,0.05);
-    border: 1.5px solid #1a73e8;
     padding: 20px;
 }
 
