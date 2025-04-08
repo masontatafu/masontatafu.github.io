@@ -46,8 +46,3 @@ I’m comfortable working with a variety of platforms and workflows:
 </div>
 
 ---
-
-## 🤝 Soft Skills
-{:.about-header}
-
-Being a student-athlete, team player, and tech collaborator has taught me to balance people and
