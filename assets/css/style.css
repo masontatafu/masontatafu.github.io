@@ -453,12 +453,3 @@ main > :last-child {
 }
 
 
-/* updating the text box background for each section */
-.about-section,
-.intro-block,
-.intro-wrapper,
-.contact-container,
-.project-card {
-    background-color: rgba(30, 144, 255, 0.1) !important; /* transparent soft blue */
-}
-
