@@ -303,7 +303,7 @@ body {
 
 .skills-section {
     max-width: 800px;
-    margin: 0 auto 80px auto;
+    margin: 0 auto 15px auto;
     font-size: 1.2rem;
     line-height: 1.6;
     text-align: center;
@@ -325,11 +325,14 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
-    margin-top: 10px;      /* Reduced to sit closer to the paragraph */
+    margin-top: 0px;      /* Reduced to sit closer to the paragraph */
     margin-bottom: 0;
     max-width: 750px;
     margin-left: auto;
     margin-right: auto;
+    background-color: rgba(26,115,232,0.05);
+    border: 1.5px solid #1a73e8;
+    padding: 20px;
 }
 
 .skill-tag {
