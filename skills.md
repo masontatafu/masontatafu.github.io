@@ -3,11 +3,6 @@ title: "Skills"
 layout: default
 ---
 
-# Skills
-{:.page-title}
-
----
-
 ## 💻 Technical Skills
 {:.about-header}
 
@@ -31,10 +26,8 @@ I enjoy building systems that are clean under the hood — not just on the surfa
 
 ## 🧰 Tools & Platforms
 {:.about-header}
-
 I’m comfortable working with a variety of platforms and workflows:
 {:.skills-section}
-
 <div class="about-section">
   <div class="skills-grid">
     <span class="skill-tag">VS Code</span>
@@ -44,5 +37,3 @@ I’m comfortable working with a variety of platforms and workflows:
     <span class="skill-tag">Agile Methods</span>
   </div>
 </div>
-
----
