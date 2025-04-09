@@ -1,5 +1,5 @@
 # Projects
-{:.page-title}
+{:.about-header}
 
 Explore a collection of my projects, including C# applications, Python scripts, and data analytics notebooks.
 
