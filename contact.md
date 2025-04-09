@@ -14,7 +14,7 @@ Whether you want to collaborate, work together, or just say hey — I’m always
 
 **Email:** [masontatafu9@gmail.com](mailto:masontatafu9@gmail.com)  
 **Location:** Louisville, KY  
-**Resume:** [Download PDF](/assets/Mason%20Tatafu%20Current%20Resume%20-%202025.pdf)
+**Resume:** [Download PDF](/assets/Mason%20Tatafu%20Current%20Resume%20-%202025.pdf){:target="_blank"}
 {:.about-section}
 
 ## 🌐 Social Links
