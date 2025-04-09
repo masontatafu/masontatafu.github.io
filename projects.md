@@ -8,6 +8,8 @@ Explore a collection of my projects, including C# applications, Python scripts, 
 ## 🧪 Python Labs
 {:.about-header}
 
+<div class="about-section">
+  
 <div class="project-card">
   <h3>Lab 1 – ATM (Python)</h3>
   <p>Simulates ATM withdrawals and calculates $20s, $10s, $5s, and $1s.</p>
@@ -57,10 +59,13 @@ Explore a collection of my projects, including C# applications, Python scripts, 
   <a href="https://github.com/masontatafu/Auto-MPG-Regression" target="_blank">View on GitHub</a>
 </div>
 
+</div>
 
 ## 🪟 C# GUI Projects
 {:.about-header}
 
+<div class="about-section">
+  
 <div class="project-card">
   <h3>Lab 2 – Tip Calculator (GUI)</h3>
   <p>C# Forms app that calculates three recommended tip amounts.</p>
@@ -96,10 +101,14 @@ Explore a collection of my projects, including C# applications, Python scripts, 
   <a href="https://github.com/masontatafu/Item-Manager" target="_blank">View on GitHub</a>
 </div>
 
+</div>
+
 
 ## 🖥️ Console Apps
 {:.about-header}
 
+<div class="about-section">
+  
 <div class="project-card">
   <h3>Lab 5 – Temp Average</h3>
   <p>Accepts valid temperatures and calculates average after sentinel.</p>
@@ -114,3 +123,4 @@ Explore a collection of my projects, including C# applications, Python scripts, 
   <a href="https://github.com/masontatafu/Dentist-Appointment-Cost-Calculator" target="_blank">View on GitHub</a>
 </div>
 
+</div>
