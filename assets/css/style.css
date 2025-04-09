@@ -453,4 +453,16 @@ main > :last-child {
     margin-bottom: 100px;
 }
 
-
+.tag {
+  display: inline-block;
+  background-color: #1a73e8;
+  color: white;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 10px;
+  margin-right: 6px;
+  margin-top: 6px;
+}
+.project-tags {
+  margin-top: 8px;
+}
