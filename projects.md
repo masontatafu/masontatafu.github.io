@@ -114,3 +114,20 @@ Explore a collection of my projects, including C# applications, Python scripts, 
   <a href="https://github.com/masontatafu/Dentist-Appointment-Cost-Calculator" target="_blank">View on GitHub</a>
 </div>
 
+## 🌟 Featured Projects
+{:.about-header}
+
+<div class="project-card">
+  <h3>MVC Artwork Search (ASP.NET)</h3>
+  <p>ASP.NET Core MVC app that fetches artwork information from an external API.</p>
+  <div class="project-tags"><span class="tag">C#</span> <span class="tag">ASP.NET Core</span> <span class="tag">MVC</span> <span class="tag">API</span></div>
+  <a href="https://github.com/masontatafu/MVC-Artwork-API" target="_blank">View on GitHub</a>
+</div>
+
+<div class="project-card">
+  <h3>CIS411 Final GUI App</h3>
+  <p>Final C# Windows Forms project for CIS411 with custom interface and logic.</p>
+  <div class="project-tags"><span class="tag">C#</span> <span class="tag">GUI</span> <span class="tag">Final Project</span></div>
+  <a href="https://github.com/masontatafu/GUI-Application" target="_blank">View on GitHub</a>
+</div>
+
