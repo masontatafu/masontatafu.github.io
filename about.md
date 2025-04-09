@@ -46,5 +46,5 @@ Occasionally drops a freestyle rap for fun 🎤
 
 Email: [masontatafu9@gmail.com](mailto:masontatafu9@gmail.com)  
 Location: Louisville, KY  
-[Download Resume (PDF)](/assets/Mason%20Tatafu%20Current%20Resume%20-%202025.pdf)
+[Download Resume (PDF)](/assets/Mason%20Tatafu%20Current%20Resume%20-%202025.pdf){:target="_blank"}
 {:.about-section}
