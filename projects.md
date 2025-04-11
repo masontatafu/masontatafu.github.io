@@ -121,7 +121,7 @@ Explore a collection of my projects, including C# applications, Python scripts, 
   <h3>CareGroup Hospital Case Study</h3>
   <p>Analyzes the catastrophic 2002 IT collapse at CareGroup Hospital, highlighting issues in infrastructure fragility, IT governance, and stakeholder response.</p>
   <div class="project-tags"><span class="tag">Case Study</span> <span class="tag">IT Governance</span> <span class="tag">Healthcare</span></div>
-  <a href="/assets/docs/CareGroup Case Study .pdf" target="_blank">View PDF</a>
+  <a href="/assets/docs/CareGroup Case Study.pdf" target="_blank">View PDF</a>
 </div>
 
 <div class="project-card">
