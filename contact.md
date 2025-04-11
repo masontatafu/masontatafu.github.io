@@ -20,7 +20,19 @@ Whether you want to collaborate, work together, or just say hey — I’m always
 ## 🌐 Social Links
 {:.about-header}
 
-[GitHub](https://github.com/masontatafu)  
-[LinkedIn](https://www.linkedin.com/in/mason-tatafu-91b0742a2)  
-[Instagram](https://www.instagram.com/masontatafu)
+<div class="social-icons">
+  <a href="https://github.com/masontatafu" target="_blank" rel="noopener noreferrer">
+    <img src="/assets/images/ghub.jpg" alt="GitHub" class="social-icon-img">
+  </a>
+  <a href="https://www.linkedin.com/in/mason-tatafu-91b0742a2" target="_blank" rel="noopener noreferrer">
+    <img src="/assets/images/linkedin.png" alt="LinkedIn" class="social-icon-img">
+  </a>
+  <a href="https://www.instagram.com/masontatafu" target="_blank" rel="noopener noreferrer">
+    <img src="/assets/images/insta.jpg" alt="Instagram" class="social-icon-img">
+  </a>
+  <a href="https://www.facebook.com/profile.php?id=100009571093618" target="_blank" rel="noopener noreferrer">
+    <img src="/assets/images/fb.png" alt="Facebook" class="social-icon-img">
+  </a>
+</div>
+
 {:.about-section}
