@@ -420,6 +420,28 @@ body {
     }
 }
 
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.social-icon-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* makes them circular */
+  object-fit: cover;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  cursor: pointer;
+}
+
+.social-icon-img:hover {
+  transform: scale(1.15);
+  filter: brightness(1.15);
+}
+
 
 /* projects page */
 
@@ -466,3 +488,6 @@ main > :last-child {
 .project-tags {
   margin-top: 8px;
 }
+
+
+    
