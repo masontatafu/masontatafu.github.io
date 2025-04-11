@@ -22,20 +22,16 @@ My goal is to merge my competitive mindset with tech. I’m working toward a car
 ## 🎓 Education
 {:.about-header}
 
-<div class="about-section">
+<div class="about-section centered-edu">
 
-**University of Louisville** – B.S. in Computer Information Systems  
-*2023 – 2025 (Web Dev & Cybersecurity Track)*
+<p><strong>University of Louisville</strong><br>
+<span class="edu-sub">B.S. in Computer Information Systems<br>2023 – 2025 (Web Dev & Cybersecurity Track)</span></p>
 
-<br><br>
+<p><strong>Hofstra University</strong><br>
+<span class="edu-sub">B.S. in Computer Science<br>2021 – 2023</span></p>
 
-**Hofstra University** – B.S. in Computer Science  
-*2021 – 2023*
-
-<br><br>
-
-**Trinity College, Perth** – High School Diploma  
-*Graduated 2020*
+<p><strong>Trinity College, Perth</strong><br>
+<span class="edu-sub">High School Diploma<br>Graduated 2020</span></p>
 
 </div>
 
