@@ -114,6 +114,45 @@ Explore a collection of my projects, including C# applications, Python scripts, 
   <a href="https://github.com/masontatafu/Dentist-Appointment-Cost-Calculator" target="_blank">View on GitHub</a>
 </div>
 
+## 📊 Business & IT Strategy Reports
+{:.about-header}
+
+<div class="project-card">
+  <h3>CareGroup Hospital Case Study</h3>
+  <p>Analyzes the catastrophic 2002 IT collapse at CareGroup Hospital, highlighting issues in infrastructure fragility, IT governance, and stakeholder response.</p>
+  <div class="project-tags"><span class="tag">Case Study</span> <span class="tag">IT Governance</span> <span class="tag">Healthcare</span></div>
+  <a href="/assets/docs/CareGroup Case Study .pdf" target="_blank">View PDF</a>
+</div>
+
+<div class="project-card">
+  <h3>Target Data Breach Case Study</h3>
+  <p>Breaks down the 2013 breach where hackers stole millions of customer records due to poor vendor security and slow internal response.</p>
+  <div class="project-tags"><span class="tag">Cybersecurity</span> <span class="tag">Retail</span> <span class="tag">Vendor Management</span></div>
+  <a href="/assets/docs/case analysis - target case.pdf" target="_blank">View PDF</a>
+</div>
+
+<div class="project-card">
+  <h3>Vermont Teddy Bear Case Study</h3>
+  <p>Evaluates IT and operational challenges in a seasonal retail company and recommends a phased IT modernization approach.</p>
+  <div class="project-tags"><span class="tag">E-Commerce</span> <span class="tag">IT Strategy</span> <span class="tag">Retail</span></div>
+  <a href="/assets/docs/case analysis VTB.pdf" target="_blank">View PDF</a>
+</div>
+
+<div class="project-card">
+  <h3>GPA Strategic IT Assessment</h3>
+  <p>Performs an IT infrastructure audit for a nonprofit organization, focusing on improving adoption tracking, donations, and volunteer coordination.</p>
+  <div class="project-tags"><span class="tag">Nonprofit</span> <span class="tag">Strategic Planning</span> <span class="tag">IT Audit</span></div>
+  <a href="/assets/docs/IT Strategic Assessment Report - cis410.pdf" target="_blank">View PDF</a>
+</div>
+
+<div class="project-card">
+  <h3>Volkswagen Group & AI Strategy Case Study</h3>
+  <p>Analyzes Volkswagen's integration of AI across its operations and evaluates internal vs. external strategies for organizational transformation.</p>
+  <div class="project-tags"><span class="tag">Automotive</span> <span class="tag">AI</span> <span class="tag">Business Strategy</span></div>
+  <a href="/assets/docs/Volkswagen Group and AI Case Study Analysis.pdf" target="_blank">View PDF</a>
+</div>
+
+
 ## 🌟 Featured Projects
 {:.about-header}
 
