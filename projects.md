@@ -5,6 +5,39 @@ Explore a collection of my projects, including C# applications, Python scripts, 
 {:.skills-section}
 ---
 
+## 📚 System Design Projects
+{:.about-header}
+
+These projects showcase the full lifecycle of a complex web-based system built for a nonprofit client. The deliverables span from initial planning and user requirement analysis through to interface design, system architecture, and database implementation. Every component was custom designed to support real-world use cases such as recurring donations, analytics, questionnaire tools, and volunteer forms — with a focus on usability, scalability, and maintainability.
+
+The work includes visual modeling (UML diagrams), database schema design, functional and non-functional requirements specification, Gantt charts, and fully navigable HTML interface prototypes. It represents a complete systems development lifecycle execution from concept to implementation-ready documentation.
+{:.about-section}
+
+<div class="project-card">
+  <h3>Worth the Words – Elaboration Specification</h3>
+  <p>Designed and documented a full-featured nonprofit website system, including use case modeling, UI design, security planning, and a relational database schema. Delivered HTML prototypes, sequence diagrams, and architecture design aligned with user roles and workflows.</p>
+  <div class="project-tags">
+    <span class="tag">System Design</span>
+    <span class="tag">Use Cases</span>
+    <span class="tag">UML</span>
+    <span class="tag">Prototyping</span>
+  </div>
+  <a href="/assets/docs/Elaboration Specification.pdf" target="_blank">View PDF</a>
+</div>
+
+<div class="project-card">
+  <h3>Worth the Words – Final System Prototype</h3>
+  <p>Finalized UI navigation, Gantt timelines, database definitions, and annotated class diagrams. Built a complete prototype of the user-facing and admin-facing forms for core website features like donation, analytics, and content customization.</p>
+  <div class="project-tags">
+    <span class="tag">Interface Design</span>
+    <span class="tag">Database Modeling</span>
+    <span class="tag">Prototypes</span>
+    <span class="tag">Final Submission</span>
+  </div>
+  <a href="/assets/docs/Iteration 5.pdf" target="_blank">View PDF</a>
+</div>
+
+
 ## 🧪 Python Labs
 {:.about-header}
   
