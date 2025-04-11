@@ -39,12 +39,3 @@ USL2 Top 10 Prospect in 2022.
 Into animation, coding side projects, and FIFA.  
 Occasionally drops a freestyle rap for fun 🎤
 {:.about-section}
-
-
-## 📬 Contact Me
-{:.about-header}
-
-Email: [masontatafu9@gmail.com](mailto:masontatafu9@gmail.com)  
-Location: Louisville, KY  
-[Download Resume (PDF)](/assets/Mason%20Tatafu%20Current%20Resume%20-%202025.pdf){:target="_blank"}
-{:.about-section}
