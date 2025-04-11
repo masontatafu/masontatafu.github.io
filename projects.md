@@ -8,9 +8,7 @@ Explore a collection of my projects, including C# applications, Python scripts, 
 ## 📚 System Design Projects
 {:.about-header}
 
-These projects showcase the full lifecycle of a complex web-based system built for a nonprofit client. The deliverables span from initial planning and user requirement analysis through to interface design, system architecture, and database implementation. Every component was custom designed to support real-world use cases such as recurring donations, analytics, questionnaire tools, and volunteer forms — with a focus on usability, scalability, and maintainability.
-
-The work includes visual modeling (UML diagrams), database schema design, functional and non-functional requirements specification, Gantt charts, and fully navigable HTML interface prototypes. It represents a complete systems development lifecycle execution from concept to implementation-ready documentation.
+These projects showcase the full lifecycle of a complex web-based system built for a nonprofit client. The deliverables span from initial planning and user requirement analysis through to interface design, system architecture, and database implementation. Every component was custom designed to support real-world use cases such as recurring donations, analytics, questionnaire tools, and volunteer forms — with a focus on usability, scalability, and maintainability. The work includes visual modeling (UML diagrams), database schema design, functional and non-functional requirements specification, Gantt charts, and fully navigable HTML interface prototypes. It represents a complete systems development lifecycle execution from concept to implementation-ready documentation.
 {:.about-section}
 
 <div class="project-card">
