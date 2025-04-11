@@ -431,11 +431,16 @@ body {
 .social-icon-img {
   width: 60px;
   height: 60px;
-  border-radius: 50%; /* makes them circular */
+  border-radius: 50%;
   object-fit: cover;
+  display: block;
+  padding: 2px;
+  background-color: white;
+  box-sizing: border-box;
   transition: transform 0.2s ease, filter 0.2s ease;
   cursor: pointer;
 }
+
 
 .social-icon-img:hover {
   transform: scale(1.15);
@@ -443,8 +448,7 @@ body {
 }
 
 .social-icon-img[alt="LinkedIn"] {
-  background-color: #0A66C2;
-  padding: 5px;
+  scale: 0.92;
 }
 
 
