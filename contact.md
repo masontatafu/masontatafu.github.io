@@ -40,5 +40,3 @@ Whether you want to collaborate, work together, or just say hey — I’m always
 
 {:.about-section}
 
-</div>
-{:.about-section}
