@@ -337,6 +337,14 @@ body {
   margin-top: 6px;
 }
 
+.about-section:last-of-type {
+  margin-bottom: 80px; /* gives breathing room at bottom of last section */
+}
+
+.social-icons {
+  margin-bottom: 20px; /* adds slight padding under the icons themselves */
+}
+
 
 /* SKILLS PAGE */
 .page-title {
