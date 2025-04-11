@@ -3,7 +3,11 @@ title: "About Me"
 layout: default
 ---
 
-![Mason Tatafu](/assets/images/IMG_5131.jpg){:.intro-pic}
+<div class="about-image-row">
+  <img src="/assets/images/A709B8AE-7295-4450-840C-B09CAADFDA6F.JPG" alt="Dog in the car">
+  <img src="/assets/images/IMG_0838.JPG" alt="Beach ball moment">
+  <img src="/assets/images/IMG_1373 2.JPG" alt="Louisville soccer action">
+</div>
 
 {: .intro-block}
 I'm a student-athlete and aspiring IT professional with roots in Australia and current base in Louisville. I’m wrapping up my degree in Computer Information Systems at the University of Louisville, while continuing my soccer career in the NCAA and USL2. Off the field, I'm all about building things — especially digital ones — that make life smoother, smarter, or just more fun.
