@@ -11,8 +11,6 @@ Explore a collection of my projects, including C# applications, Python scripts, 
 These projects showcase the full lifecycle of a complex web-based system built for a nonprofit client. The deliverables span from initial planning and user requirement analysis through to interface design, system architecture, and database implementation. Every component was custom designed to support real-world use cases such as recurring donations, analytics, questionnaire tools, and volunteer forms — with a focus on usability, scalability, and maintainability. The work includes visual modeling (UML diagrams), database schema design, functional and non-functional requirements specification, Gantt charts, and fully navigable HTML interface prototypes. It represents a complete systems development lifecycle execution from concept to implementation-ready documentation.
 {:.about-section}
 
-<div class="project-grid">
-
 <div class="project-card">
   <h3>Worth the Words – Elaboration Specification</h3>
   <p>Designed and documented a full-featured nonprofit website system, including use case modeling, UI design, security planning, and a relational database schema. Delivered HTML prototypes, sequence diagrams, and architecture design aligned with user roles and workflows.</p>
@@ -37,13 +35,10 @@ These projects showcase the full lifecycle of a complex web-based system built f
   <a href="/assets/docs/Iteration 5.pdf" target="_blank">View PDF</a>
 </div>
 
-</div>
 
 ## 🧪 Python Labs
 {:.about-header}
-
-<div class="project-grid">
-
+  
 <div class="project-card">
   <h3>ATM</h3>
   <p>Simulates ATM withdrawals and calculates $20s, $10s, $5s, and $1s.</p>
@@ -93,13 +88,10 @@ These projects showcase the full lifecycle of a complex web-based system built f
   <a href="https://github.com/masontatafu/Auto-MPG-Regression" target="_blank">View on GitHub</a>
 </div>
 
-</div>
 
 ## 🪟 C# GUI Projects
 {:.about-header}
-
-<div class="project-grid">
-
+  
 <div class="project-card">
   <h3>Tip Calculator (GUI)</h3>
   <p>C# Forms app that calculates three recommended tip amounts.</p>
@@ -135,13 +127,10 @@ These projects showcase the full lifecycle of a complex web-based system built f
   <a href="https://github.com/masontatafu/Item-Manager" target="_blank">View on GitHub</a>
 </div>
 
-</div>
 
 ## 🖥️ Console Apps
 {:.about-header}
-
-<div class="project-grid">
-
+  
 <div class="project-card">
   <h3>Temperature Average</h3>
   <p>Accepts valid temperatures and calculates average after sentinel.</p>
@@ -156,12 +145,8 @@ These projects showcase the full lifecycle of a complex web-based system built f
   <a href="https://github.com/masontatafu/Dentist-Appointment-Cost-Calculator" target="_blank">View on GitHub</a>
 </div>
 
-</div>
-
 ## 📊 Business & IT Strategy Reports
 {:.about-header}
-
-<div class="project-grid">
 
 <div class="project-card">
   <h3>CareGroup Hospital Case Study</h3>
@@ -198,12 +183,9 @@ These projects showcase the full lifecycle of a complex web-based system built f
   <a href="/assets/docs/Volkswagen Group and AI Case Study Analysis.pdf" target="_blank">View PDF</a>
 </div>
 
-</div>
 
 ## 🌟 Featured Projects
 {:.about-header}
-
-<div class="project-grid">
 
 <div class="project-card">
   <h3>MVC Artwork Search (ASP.NET)</h3>
@@ -214,10 +196,8 @@ These projects showcase the full lifecycle of a complex web-based system built f
 
 <div class="project-card">
   <h3>CIS411 Final GUI App</h3>
-  <p>Final C# Windows Forms project with custom interface and logic for user workflows.</p>
+  <p>Final C# Windows Forms project for CIS411 with custom interface and logic.</p>
   <div class="project-tags"><span class="tag">C#</span> <span class="tag">GUI</span> <span class="tag">Final Project</span></div>
   <a href="https://github.com/masontatafu/GUI-Application" target="_blank">View on GitHub</a>
-</div>
-
 </div>
 
