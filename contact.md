@@ -12,10 +12,13 @@ Whether you want to collaborate, work together, or just say hey — I’m always
 ## 📄 Contact Info
 {:.about-header}
 
+<div class="about-section">
+  
 **Email:** [masontatafu9@gmail.com](mailto:masontatafu9@gmail.com) 
-**Phone** [+1(502)6312210]
+**Phone:** +1 (502) 631-2210 
 **Location:** Louisville, KY  
-{:.about-section}
+
+</div>
 
 ## 🌐 Social Links
 {:.about-header}
