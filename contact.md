@@ -25,7 +25,7 @@ Whether you want to collaborate, work together, or just say hey — I’m always
     <img src="/assets/images/Octicons-mark-github.svg" alt="GitHub" class="social-icon-img">
   </a>
   <a href="https://www.linkedin.com/in/mason-tatafu-91b0742a2" target="_blank" rel="noopener noreferrer">
-    <img src="/assets/images/linkedin.webp" alt="LinkedIn" class="social-icon-img">
+    <img src="/assets/images/linkedin-circled.png" alt="LinkedIn" class="social-icon-img">
   </a>
   <a href="https://www.instagram.com/masontatafu" target="_blank" rel="noopener noreferrer">
     <img src="/assets/images/insta.jpg" alt="Instagram" class="social-icon-img">
