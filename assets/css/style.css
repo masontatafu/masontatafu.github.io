@@ -447,7 +447,9 @@ body {
   filter: brightness(1.15);
 }
 
-
+.social-icon-img[alt="LinkedIn"] {
+  scale: 1.08; /* bump this up slightly to match the others */
+}
 
 
 /* projects page */
