@@ -196,6 +196,30 @@ body {
 
 /* == about page == */
 
+/* === Horizontal image row for About Me === */
+.about-image-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 30px auto 20px auto;
+  max-width: 960px;
+}
+
+.about-image-row img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.about-image-row img:hover {
+  transform: scale(1.05);
+}
+
 /* Page title at the top of about.md */
 .page-title {
     text-align: center;
