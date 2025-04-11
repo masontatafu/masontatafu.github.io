@@ -10,10 +10,11 @@ layout: default
 Welcome to my portfolio.
 {:.subheading}
 
-[Resume](Mason%20Tatafu%20Current%20Resume%20-%202025.pdf){:.box-link}
-[About Me](/about){:.box-link}
-[Projects](/projects){:.box-link}
-{:.box-section}
+<div class="box-section">
+  <a href="Mason%20Tatafu%20Current%20Resume%20-%202025.pdf" class="box-link" target="_blank" rel="noopener noreferrer">Resume</a>
+  <a href="/about" class="box-link">About Me</a>
+  <a href="/projects" class="box-link">Projects</a>
+</div>
 
 
 
