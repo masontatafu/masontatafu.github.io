@@ -13,10 +13,10 @@ Whether you want to collaborate, work together, or just say hey — I’m always
 {:.about-header}
 
 <div class="about-section">
-  
-**Email:** [masontatafu9@gmail.com](mailto:masontatafu9@gmail.com) 
-**Phone:** +1 (502) 631-2210 
-**Location:** Louisville, KY  
+
+<p><strong>Email:</strong> <a href="mailto:masontatafu9@gmail.com">masontatafu9@gmail.com</a></p>
+<p><strong>Phone:</strong> +1 (502) 631-2210</p>
+<p><strong>Location:</strong> Louisville, KY</p>
 
 </div>
 
