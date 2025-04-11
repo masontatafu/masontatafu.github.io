@@ -38,8 +38,10 @@ My goal is to merge my competitive mindset with tech. I’m working toward a car
 ## ⚡ Fun Facts & Hobbies
 {:.about-header}
 
-I am an international student-athlete from Australia.
-I love animals, I have two dogs, both poodles. 
-Aside from soccer, my hobbies include gaming and watching movies. 
+<div class="about-section">
+I am an international student-athlete from Australia.<br>
+I love animals, I have two dogs, both poodles.<br>
+Aside from soccer, my hobbies include gaming and watching movies.<br>
+I'm a middle child with an older brother and a younger sister.
+</div>
 
-{:.about-section}
