@@ -12,9 +12,10 @@ Whether you want to collaborate, work together, or just say hey — I’m always
 ## 📄 Contact Info
 {:.about-header}
 
-**Email:** [masontatafu9@gmail.com](mailto:masontatafu9@gmail.com)  
+**Email:** [masontatafu9@gmail.com](mailto:masontatafu9@gmail.com) 
+**Phone** [+1(502)6312210]
 **Location:** Louisville, KY  
-**Resume:** [Download PDF](/assets/Mason%20Tatafu%20Current%20Resume%20-%202025.pdf){:target="_blank"}
+
 {:.about-section}
 
 ## 🌐 Social Links
