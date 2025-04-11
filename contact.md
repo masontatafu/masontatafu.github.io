@@ -15,7 +15,6 @@ Whether you want to collaborate, work together, or just say hey — I’m always
 **Email:** [masontatafu9@gmail.com](mailto:masontatafu9@gmail.com) 
 **Phone** [+1(502)6312210]
 **Location:** Louisville, KY  
-
 {:.about-section}
 
 ## 🌐 Social Links
