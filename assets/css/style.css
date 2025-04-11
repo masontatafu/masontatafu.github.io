@@ -319,6 +319,24 @@ body {
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
 }
 
+.centered-edu {
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.centered-edu p {
+  margin-bottom: 25px;
+}
+
+.edu-sub {
+  font-weight: normal;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  display: inline-block;
+  margin-top: 6px;
+}
+
 
 /* SKILLS PAGE */
 .page-title {
