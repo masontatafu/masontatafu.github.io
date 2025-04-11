@@ -38,9 +38,7 @@ My goal is to merge my competitive mindset with tech. I’m working toward a car
 ## ⚡ Fun Facts & Hobbies
 {:.about-header}
 
-Former A-League player with Perth Glory and Asian Champions League experience.  
-NCAA D1 athlete at two universities.  
-USL2 Top 10 Prospect in 2022.  
-Into animation, coding side projects, and FIFA.  
-Occasionally drops a freestyle rap for fun 🎤
+I am an international student-athlete from Australia.
+I love animals, I have two dogs, both poodles. 
+Aside from soccer, my hobbies include gaming and watching movies. 
 {:.about-section}
