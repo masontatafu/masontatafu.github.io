@@ -10,7 +10,7 @@ layout: default
 </div>
 
 {: .intro-block}
-I'm a student-athlete and aspiring IT professional with roots in Australia and current base in Louisville. I’m wrapping up my degree in Computer Information Systems at the University of Louisville, while continuing my soccer career in the NCAA and USL2. Off the field, I'm all about building things — especially digital ones — that make life smoother, smarter, or just more fun.
+I'm a recent CIS graduate with hands-on IT support experience, currently based in Melbourne. I’ve balanced a competitive football career with my studies and work—living independently across the U.S., Croatia, and Australia. I'm now looking for roles where I can keep learning, contribute to a team, and apply both my technical skills and real-world adaptability.
 
 
 ## 🎯 Career Goals
@@ -39,7 +39,6 @@ My goal is to merge my competitive mindset with tech. I’m working toward a car
 {:.about-header}
 
 <div class="about-section">
-I am an international student-athlete from Australia.<br>
 I love animals, I have two dogs, both poodles.<br>
 Aside from soccer, my hobbies include gaming and watching movies.<br>
 I'm a middle child with an older brother and a younger sister.
