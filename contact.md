@@ -15,8 +15,8 @@ Whether you want to collaborate, work together, or just say hey — I’m always
 
 <div class="about-section">
   <p><strong>Email:</strong> <a href="mailto:masontatafu9@gmail.com">masontatafu9@gmail.com</a></p>
-  <p><strong>Phone:</strong> +1 (502) 631-2210</p>
-  <p><strong>Location:</strong> Louisville, KY</p>
+  <p><strong>Phone:</strong> +61 422 968 278</p>
+  <p><strong>Location:</strong> Melbourne, Australia</p>
 </div>
 
 ## 🌐 Social Links
