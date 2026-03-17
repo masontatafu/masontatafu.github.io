@@ -10,19 +10,12 @@ layout: default
 </div>
 
 {: .intro-block}
-I’m a CIS graduate currently working as a Bookings Officer, where I manage systems, coordinate operations, and handle customer enquiries day to day. My role sits across admin, digital systems and customer service, which has given me practical experience working with real processes and data.
-
-I’ve also built and worked on websites, including my own project “Doggodiary” and a team-based platform during my degree. I’m based in Sydney and looking to move further into roles that combine systems, technology and problem solving.
-
-I’ve lived and worked across the U.S., Croatia and Australia, which has helped me adapt quickly to new environments and work with different people and teams.
+I’m a CIS graduate currently working as a Bookings Officer, where I manage systems, coordinate operations, and handle customer enquiries day to day. My role sits across admin, digital systems and customer service, which has given me practical experience working with real processes and data. I’ve also built and worked on websites, including my own project “Doggodiary” and a team-based platform during my degree. I’m based in Sydney and looking to move further into roles that combine systems, technology and problem solving. I’ve lived and worked across the U.S., Croatia and Australia, which has helped me adapt quickly to new environments and work with different people and teams.
 
 
 ## 🎯 Career Goals
 {:.about-header}
-
-I’m working toward a career that sits between systems, data and technology. I’m interested in areas like system analysis, data, web platforms and eventually more technical roles in development or analytics.
-
-Right now I’m focused on building practical experience, improving my technical skills and getting exposure to how systems operate in real environments. Long term, I want to be part of a team building and improving systems that are actually used day to day — whether that’s in operations, analytics or something more technical.
+I’m working toward a career that sits between systems, data and technology. I’m interested in areas like system analysis, data, web platforms and eventually more technical roles in development or analytics. Right now I’m focused on building practical experience, improving my technical skills and getting exposure to how systems operate in real environments. Long term, I want to be part of a team building and improving systems that are actually used day to day — whether that’s in operations, analytics or something more technical.
 {:.about-section}
 
 ## 🎓 Education
