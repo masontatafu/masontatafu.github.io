@@ -10,7 +10,9 @@ layout: default
 </div>
 
 {: .intro-block}
-I’m a CIS graduate currently working as a Bookings Officer, where I manage systems, coordinate operations, and handle customer enquiries day to day. My role sits across admin, digital systems and customer service, which has given me practical experience working with real processes and data. I’ve also built and worked on websites, including my own project “Doggodiary” and a team-based platform during my degree. I’m based in Sydney and looking to move further into roles that combine systems, technology and problem solving. I’ve lived and worked across the U.S., Croatia and Australia, which has helped me adapt quickly to new environments and work with different people and teams.
+Computer Information Systems graduate with experience supporting digital platforms, business systems, and technology-enabled operations across Microsoft 365, SharePoint, enterprise applications, and operational environments. Skilled in troubleshooting technical issues, supporting end users, maintaining system records, and contributing to technical projects and process improvements. Strong interest in platform engineering, cloud technologies, AI-enabled workflows, and enterprise systems, with hands-on experience using generative AI tools and automation concepts to improve efficiency and problem solving. Collaborative, adaptable, and passionate about learning new technologies in fast-paced team environments. 
+
+Completed my degree as a student-athlete in the United States on a full academic and athletic football scholarship, following previous involvement at professional A-League level and currently competing in the NPL NSW competition.
 
 
 ## 🎯 Career Goals
@@ -24,7 +26,7 @@ I’m working toward a career that sits between systems, data and technology. I�
 <div class="about-section centered-edu">
 
 <p><strong>University of Louisville</strong><br>
-<span class="edu-sub">B.S. in Computer Information Systems<br>2023 – 2025 (Web Dev & Cybersecurity Track)</span></p>
+<span class="edu-sub">B.S. in Computer Information Systems<br>2023 – 2025 (Web Development Track)</span></p>
 
 <p><strong>Hofstra University</strong><br>
 <span class="edu-sub">B.S. in Computer Science<br>2021 – 2023</span></p>
