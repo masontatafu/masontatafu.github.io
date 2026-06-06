@@ -11,7 +11,7 @@ Welcome to my portfolio.
 {:.subheading}
 
 <div class="box-section">
-  <a href="MASON TATAFU.pdf" class="box-link" target="_blank" rel="noopener noreferrer">Resume</a>
+  <a href="Mason Tatafu 1.pdf" class="box-link" target="_blank" rel="noopener noreferrer">Resume</a>
   <a href="/about" class="box-link">About Me</a>
   <a href="/projects" class="box-link">Projects</a>
 </div>
