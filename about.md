@@ -10,9 +10,7 @@ layout: default
 </div>
 
 {: .intro-block}
-Computer Information Systems graduate with experience supporting digital platforms, business systems, and technology-enabled operations across Microsoft 365, SharePoint, enterprise applications, and operational environments. Skilled in troubleshooting technical issues, supporting end users, maintaining system records, and contributing to technical projects and process improvements. Strong interest in platform engineering, cloud technologies, AI-enabled workflows, and enterprise systems, with hands-on experience using generative AI tools and automation concepts to improve efficiency and problem solving. Collaborative, adaptable, and passionate about learning new technologies in fast-paced team environments. 
-
-Completed my degree as a student-athlete in the United States on a full academic and athletic football scholarship, following previous involvement at professional A-League level and currently competing in the NPL NSW competition.
+Computer Information Systems graduate with experience supporting digital platforms, business systems, and technology-enabled operations across Microsoft 365, SharePoint, enterprise applications, and operational environments. Skilled in troubleshooting technical issues, supporting end users, maintaining system records, and contributing to technical projects and process improvements. Strong interest in platform engineering, cloud technologies, AI-enabled workflows, and enterprise systems, with hands-on experience using generative AI tools and automation concepts to improve efficiency and problem solving. Collaborative, adaptable, and passionate about learning new technologies in fast-paced team environments. Completed my degree as a student-athlete in the United States on a full academic and athletic football scholarship, following previous involvement at professional A-League level and currently competing in the NPL NSW competition.
 
 
 ## 🎯 Career Goals
