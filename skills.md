@@ -9,7 +9,6 @@ layout: default
 My skills sit across IT support, business systems, workflow improvement, and practical automation. I’m especially interested in using technology to make systems and processes cleaner, faster, and easier to work with.
 {:.skills-section}
 
----
 
 ## ⚙️ Automation & Scripting
 {:.about-header}
