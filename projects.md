@@ -11,10 +11,10 @@ A selection of technical projects across workflow automation, AI-assisted script
 
 ---
 
-## 🚀 Current Technical Projects
+## 🚀 Current Systems & Automation Projects
 {:.about-header}
 
-These projects are private or partly private because they involve personal workflows, platform automation, email handling, or operational logic. The public portfolio links are intended to point to case studies or documentation, not the source code.
+Selected projects are presented as case studies rather than public source code, with a focus on system design, workflow logic, documentation, testing, and practical outcomes.
 {:.about-section}
 
 <div class="project-grid">
