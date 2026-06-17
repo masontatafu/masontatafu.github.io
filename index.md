@@ -3,12 +3,15 @@ title: "Home"
 layout: default
 ---
 
-  
 # Hello, I'm Mason Tatafu
 {:.home-text}
-    
-Welcome to my portfolio.
+
+Computer Information Systems graduate based in Sydney, focused on IT, business systems, workflow automation, and AI-assisted technical projects.
 {:.subheading}
+
+<div class="about-section">
+I build and document practical technical projects across Python scripting, structured data, platform workflows, and automation. This portfolio brings together my systems, documentation, and technology projects — from business system design through to newer AI-assisted workflow tools.
+</div>
 
 <div class="box-section">
   <a href="Mason Tatafu 1.pdf" class="box-link" target="_blank" rel="noopener noreferrer">Resume</a>
