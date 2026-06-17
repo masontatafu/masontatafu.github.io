@@ -31,4 +31,3 @@ I’m open to conversations about IT, business systems, platform support, workfl
   </a>
 </div>
 
-
