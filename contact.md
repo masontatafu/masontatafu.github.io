@@ -3,11 +3,11 @@ title: "Contact"
 layout: default
 ---
 
-## 📬 Contact Me
+## 📬 Contact
 {:.about-header}
 
 <div class="about-section">
-Whether you want to collaborate, work together, or just say hey — I’m always open to a good conversation.
+I’m open to conversations about IT, business systems, platform support, workflow improvement, automation, and early-career technology opportunities.
 </div>
 
 ## 📄 Contact Info
@@ -19,9 +19,8 @@ Whether you want to collaborate, work together, or just say hey — I’m always
   <p><strong>Location:</strong> Sydney, Australia</p>
 </div>
 
-## 🌐 Social Links
+## 🌐 Professional Links
 {:.about-header}
-
 
 <div class="social-icons">
   <a href="https://github.com/masontatafu" target="_blank" rel="noopener noreferrer">
@@ -29,12 +28,6 @@ Whether you want to collaborate, work together, or just say hey — I’m always
   </a>
   <a href="https://www.linkedin.com/in/mason-tatafu-91b0742a2" target="_blank" rel="noopener noreferrer">
     <img src="/assets/images/linkedin-circled.png" alt="LinkedIn" class="social-icon-img">
-  </a>
-  <a href="https://www.instagram.com/masontatafu" target="_blank" rel="noopener noreferrer">
-    <img src="/assets/images/insta.jpg" alt="Instagram" class="social-icon-img">
-  </a>
-  <a href="https://www.facebook.com/profile.php?id=100009571093618" target="_blank" rel="noopener noreferrer">
-    <img src="/assets/images/fb.png" alt="Facebook" class="social-icon-img">
   </a>
 </div>
 
