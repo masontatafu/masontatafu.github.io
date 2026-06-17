@@ -10,7 +10,7 @@ layout: default
 </div>
 
 {: .intro-block}
-Computer Information Systems graduate, Perth-raised and now based in Sydney after completing my degree in the United States on a full academic and athletic scholarship while competing as an NCAA Division I student-athlete.
+Computer Information Systems graduate, raised in Perth and now based in Sydney after completing my degree in the United States on a full academic and athletic scholarship while competing as an NCAA Division I student-athlete.
 
 ## 👋 Profile
 {:.about-header}
@@ -51,4 +51,3 @@ Previously played at:
 <br>• Hofstra University (NCAA Division I)
 <br>• Perth Glory FC (A-League and NPL WA)
 </div>
-
