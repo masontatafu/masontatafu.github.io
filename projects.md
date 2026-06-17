@@ -9,12 +9,11 @@ layout: default
 A selection of technical projects across workflow automation, AI-assisted scripting, business systems, digital platforms, and systems documentation.
 {:.skills-section}
 
----
 
 ## 🚀 Current Systems & Automation Projects
 {:.about-header}
 
-Selected projects are presented as case studies rather than public source code, with a focus on system design, workflow logic, documentation, testing, and practical outcomes.
+Selected projects are presented as case studies rather than public source code, focusing on system design, workflow logic, documentation, testing, and practical outcomes.
 {:.about-section}
 
 <div class="project-grid">
