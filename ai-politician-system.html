@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Politician — System & Data Model</title>
+<style>
+  :root {
+    --paper: #faf8f4; --card: #ffffff; --ink: #22262f; --muted: #5d6572;
+    --line: #e6e2d9; --navy: #16324f; --navy-soft: #2c5680; --gold: #b3872c;
+    --gold-soft: #d9c491; --plate: #fbfaf6; --plate-line: #e4dfd4;
+    --chip: #eef1f5; --chip-ink: #3c5670;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: "SFMono-Regular", ui-monospace, "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #12161d; --card: #1a212c; --ink: #e7e5df; --muted: #9aa3b0;
+      --line: #2a3140; --navy: #a9c6e2; --navy-soft: #8fb4d9; --gold: #d6ab5b;
+      --gold-soft: #4a3d1f; --chip: #232b38; --chip-ink: #b9c6d6;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12161d; --card: #1a212c; --ink: #e7e5df; --muted: #9aa3b0;
+    --line: #2a3140; --navy: #a9c6e2; --navy-soft: #8fb4d9; --gold: #d6ab5b;
+    --gold-soft: #4a3d1f; --chip: #232b38; --chip-ink: #b9c6d6;
+  }
+  :root[data-theme="light"] {
+    --paper: #faf8f4; --card: #ffffff; --ink: #22262f; --muted: #5d6572;
+    --line: #e6e2d9; --navy: #16324f; --navy-soft: #2c5680; --gold: #b3872c;
+    --gold-soft: #d9c491; --chip: #eef1f5; --chip-ink: #3c5670;
+  }
+  /* diagram plates stay on light paper in both themes — printed-schematic feel */
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font-family: var(--sans); line-height: 1.6;
+         -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 3rem 1.4rem 4rem; }
+
+  header { border-top: 4px solid var(--gold); padding-top: 1.6rem; }
+  .eyebrow { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+             color: var(--gold); font-weight: 700; margin: 0 0 .5rem; }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.9rem, 4vw, 2.7rem);
+       margin: 0 0 .5rem; letter-spacing: .01em; text-wrap: balance; }
+  .lede { font-size: 1.08rem; color: var(--muted); max-width: 60ch; margin: 0; }
+
+  .stack { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1.4rem 0 0; }
+  .tag { font-family: var(--mono); font-size: .74rem; background: var(--chip);
+         color: var(--chip-ink); border-radius: 5px; padding: .28rem .55rem; }
+
+  section { margin-top: 3.4rem; }
+  .sec-head { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap;
+              border-bottom: 1px solid var(--line); padding-bottom: .5rem; margin-bottom: .3rem; }
+  .sec-num { font-family: var(--mono); font-size: .85rem; color: var(--gold); font-weight: 700; }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; margin: 0; }
+  .sec-sub { color: var(--muted); font-size: .95rem; margin: .6rem 0 1.3rem; max-width: 68ch; }
+
+  .plate { background: var(--plate); border: 1px solid var(--plate-line);
+           border-radius: 12px; padding: 1.4rem 1rem; overflow-x: auto;
+           box-shadow: 0 1px 2px rgba(20,30,50,.05), 0 10px 30px rgba(20,30,50,.06); }
+  .plate pre.mermaid { margin: 0; text-align: center; min-width: 520px; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 1rem 0 0;
+            font-size: .82rem; color: var(--muted); font-family: var(--mono); }
+  .legend b { color: var(--ink); font-weight: 600; }
+
+  .note { display: flex; gap: .7rem; margin-top: 1.2rem; padding: .9rem 1.1rem;
+          background: color-mix(in srgb, var(--gold) 9%, transparent);
+          border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0;
+          font-size: .9rem; }
+  .note .k { font-family: var(--mono); color: var(--gold); font-weight: 700;
+             flex-shrink: 0; }
+
+  /* plain-English journey */
+  .journey { margin-top: 1.4rem; }
+  .step { position: relative; display: grid; grid-template-columns: 2.5rem 1fr;
+          gap: .3rem 1.15rem; padding-bottom: 1.7rem; }
+  .step:not(:last-child)::before { content: ""; position: absolute; left: 1.2rem;
+          top: 2.7rem; bottom: -.1rem; width: 2px; background: var(--line); }
+  .step-num { grid-row: span 2; width: 2.5rem; height: 2.5rem; border-radius: 50%;
+              display: grid; place-items: center; font-family: var(--sans);
+              font-weight: 700; font-size: 1rem; background: var(--navy);
+              color: var(--paper); position: relative; z-index: 1; }
+  .step-t { font-family: var(--serif); font-weight: 600; font-size: 1.12rem;
+            align-self: center; }
+  .step-d { color: var(--muted); font-size: .96rem; margin: 0; }
+  .step-d .eg { color: var(--ink); font-style: italic; }
+  .step.loop .step-num { background: var(--card); color: var(--gold);
+            border: 2px solid var(--gold); }
+  .loop-chip { display: inline-block; margin-top: .5rem; font-family: var(--mono);
+            font-size: .76rem; color: var(--gold); border: 1px solid var(--gold-soft);
+            border-radius: 999px; padding: .2rem .7rem; }
+
+  /* plain-English safeguards grid */
+  .honest { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem; margin-top: 1.4rem; }
+  .hcard { background: var(--card); border: 1px solid var(--line);
+           border-left: 3px solid var(--gold); border-radius: 8px;
+           padding: 1rem 1.15rem; box-shadow: var(--shadow); }
+  .hcard b { font-family: var(--serif); font-size: 1.04rem; display: block;
+             margin-bottom: .25rem; }
+  .hcard p { margin: 0; color: var(--muted); font-size: .93rem; }
+
+  footer { margin-top: 3.6rem; border-top: 1px solid var(--line); padding-top: 1.2rem;
+           color: var(--muted); font-size: .82rem; }
+  a { color: var(--navy-soft); }
+  /* hand-built flow diagram — pure HTML/CSS, cannot clip, theme-aware */
+  .flow { display:flex; flex-direction:column; align-items:center; gap:.55rem;
+          font-family:var(--sans); padding:.4rem 0; }
+  .frow, .fbranch { display:flex; flex-wrap:wrap; justify-content:center;
+                    align-items:center; gap:.5rem; }
+  .fbranch { align-items:flex-start; gap:1.6rem; margin-top:.2rem; }
+  .fcol { display:flex; flex-direction:column; align-items:center; gap:.4rem; }
+  .fnode { background:var(--card); border:1px solid var(--line); border-radius:9px;
+           padding:.5rem .85rem; font-size:.9rem; text-align:center;
+           box-shadow:0 1px 2px rgba(20,30,50,.06); max-width:16rem; }
+  .fnode b { color:var(--navy); }
+  .fnode small, .fstep small { display:block; font-size:.72rem; color:var(--muted);
+           margin-top:.14rem; font-weight:400; }
+  .fnode.accent { border-color:var(--gold); border-width:1.5px; }
+  .fnode.muted { border-style:dashed; color:var(--muted); }
+  .fstep { background:var(--chip); border:1px solid var(--line); border-radius:8px;
+           padding:.45rem .7rem; font-size:.85rem; text-align:center; }
+  .fgate { background:var(--card); border:1.5px solid var(--gold); border-radius:9px;
+           padding:.5rem 1.1rem; font-weight:600; font-size:.9rem; }
+  .farrow { color:var(--gold); font-size:1.15rem; line-height:1; }
+  .fchev { color:var(--muted); font-size:1rem; }
+  .flabel { font-size:.72rem; color:var(--muted); font-family:var(--mono); }
+  .frail { margin-top:.4rem; font-size:.78rem; color:var(--muted); font-style:italic;
+           border-top:1px dashed var(--line); padding-top:.5rem; text-align:center; }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Personal project · System & data model</p>
+    <h1>AI Politician</h1>
+    <p class="lede">A reasoning engine that turns a public question into a sourced, versioned
+      political position — checks its own work, measures its own fairness, and records every step
+      so the record can be audited, never quietly rewritten.</p>
+    <div class="stack">
+      <span class="tag">Python</span>
+      <span class="tag">SQLAlchemy · SQLite</span>
+      <span class="tag">LLM pipeline (Claude API)</span>
+      <span class="tag">JSON-Schema validation</span>
+      <span class="tag">FastAPI</span>
+      <span class="tag">Jinja2 static site</span>
+      <span class="tag">pytest · 68 tests</span>
+      <span class="tag">~5,400 LOC · 29 modules · 12 tables</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>In plain English — the whole journey</h2>
+    </div>
+    <p class="sec-sub">No jargon. Here is what happens from the moment a question arrives to the
+      moment an answer is public — and how the system keeps improving its own past answers.</p>
+    <div class="journey">
+      <div class="step">
+        <span class="step-num">1</span>
+        <span class="step-t">Someone asks a question</span>
+        <p class="step-d">A real-world question comes in — <span class="eg">"Why does Australia
+          sell uranium to India but not use nuclear power at home?"</span></p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <span class="step-t">It gathers the evidence</span>
+        <p class="step-d">It searches the web, collects real sources, and grades each one for
+          trustworthiness — an official government report counts for more than a random blog.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span class="step-t">It writes a first draft</span>
+        <p class="step-d">It drafts an answer based only on what the evidence actually supports —
+          not on opinion.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <span class="step-t">It argues with itself</span>
+        <p class="step-d">It criticises its own draft, rewrites it, then deliberately argues the
+          opposite side to catch its own bias before anyone else can.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <span class="step-t">It fact-checks itself</span>
+        <p class="step-d">Before publishing, it re-opens every source it cited and confirms the
+          figures it quoted are really there. If a number can't be found, the answer is blocked.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">6</span>
+        <span class="step-t">It publishes — or holds back</span>
+        <p class="step-d">Pass every check and the answer goes live on the public website. Fail one
+          and it's set aside for a human. It never publishes what it couldn't verify.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">7</span>
+        <span class="step-t">It records everything it did</span>
+        <p class="step-d">Every step is saved to a permanent log that can't be secretly edited later,
+          so anyone can trace exactly how the answer was formed.</p>
+      </div>
+      <div class="step loop">
+        <span class="step-num">8</span>
+        <span class="step-t">It keeps re-checking its old answers</span>
+        <p class="step-d">As new questions are answered, the system spots when older answers now
+          clash or look weak — and sends them back through the process. The old version stays on the
+          record; a new, improved version replaces it in public.
+          <br><span class="loop-chip">↺ loops back to step 2</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>What keeps it honest — in plain words</h2>
+    </div>
+    <p class="sec-sub">The point of the whole system is trust. These are the guardrails, each in
+      one sentence.</p>
+    <div class="honest">
+      <div class="hcard"><b>It shows its work</b><p>Every answer links to real sources and keeps
+        the full record of how it was written.</p></div>
+      <div class="hcard"><b>It fact-checks its own numbers</b><p>Before publishing, it re-reads its
+        sources and blocks anything it can't verify.</p></div>
+      <div class="hcard"><b>It measures its own fairness</b><p>It scores whether it treats each
+        political party by the same standard — and publishes the score.</p></div>
+      <div class="hcard"><b>It argues the other side</b><p>Every answer is re-argued from the
+        opposite view to catch bias before a reader would.</p></div>
+      <div class="hcard"><b>It notices when it's out of date</b><p>Old answers are flagged for
+        review automatically as their facts age.</p></div>
+      <div class="hcard"><b>It can be challenged</b><p>Anyone can file a correction, which forces a
+        revised version — the old one stays on the record.</p></div>
+      <div class="hcard"><b>It keeps score of itself</b><p>Its predictions are tracked, so you can
+        later check whether it was actually right.</p></div>
+      <div class="hcard"><b>It can't be secretly edited</b><p>Everything is written to a
+        tamper-proof log with a published fingerprint that changes if history is altered.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>The same journey, in detail</h2>
+    </div>
+    <p class="sec-sub">Each question runs through a fixed multi-stage pipeline. Automated
+      quality gates decide whether the result is trustworthy enough to publish; anything that
+      fails is held or escalated for a human. Every stage is written to a tamper-evident log.</p>
+    <div class="plate">
+      <div class="flow">
+        <div class="fnode accent"><b>Issue</b><small>a question enters the queue</small></div>
+        <div class="farrow">↓</div>
+        <div class="frow">
+          <div class="fstep">1 · Evidence<small>web search + tiering</small></div>
+          <div class="fchev">→</div>
+          <div class="fstep">2 · Draft</div>
+          <div class="fchev">→</div>
+          <div class="fstep">3 · Critique</div>
+          <div class="fchev">→</div>
+          <div class="fstep">4 · Revise</div>
+          <div class="fchev">→</div>
+          <div class="fstep">5 · Inversion<small>argue the opposite</small></div>
+        </div>
+        <div class="farrow">↓</div>
+        <div class="fgate">Automated quality gates</div>
+        <div class="fbranch">
+          <div class="fcol">
+            <div class="flabel">passes</div>
+            <div class="fnode accent"><b>Publish</b><small>versioned position</small></div>
+            <div class="farrow">↓</div>
+            <div class="fnode accent">Public website<small>read-only, static</small></div>
+          </div>
+          <div class="fcol">
+            <div class="flabel">fails / ambiguous</div>
+            <div class="fnode muted">Held or escalated<small>for human oversight</small></div>
+          </div>
+        </div>
+        <div class="frail">Every step is written to a tamper-evident audit log (SHA-256 hash chain).</div>
+      </div>
+    </div>
+    <div class="note">
+      <span class="k">GATES</span>
+      <span>The three checks a position must clear: <b>enough credible evidence</b> (at least two
+        reputable sources and one primary/official source), <b>substantiation</b> (the specific
+        figures it cites are actually found in the cited source text), and <b>balance</b>
+        (sources aren't all leaning one way; topic coverage is measured).</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>Database schema</h2>
+    </div>
+    <p class="sec-sub">A normalised relational model built around <b>versioning</b>: a policy area
+      keeps a full history of position versions, each tied to the constitution version it was
+      reasoned from, the sources it cites, and the verbatim log of how it was produced. Nothing is
+      overwritten — a revision adds a new version and supersedes the old one.</p>
+    <div class="plate">
+<pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontFamily':'-apple-system,Segoe UI,Roboto,sans-serif','fontSize':'13px','primaryColor':'#f4f1e8','primaryTextColor':'#20303f','primaryBorderColor':'#16324f','lineColor':'#16324f'}}}%%
+erDiagram
+  ISSUES ||--o{ POLICIES : "spawns"
+  POLICIES ||--o{ POSITION_VERSIONS : "has versions of"
+  CONSTITUTION_VERSIONS ||--o{ POSITION_VERSIONS : "reasoned from"
+  POSITION_VERSIONS ||--o{ REASONING_LOGS : "records each step"
+  POSITION_VERSIONS ||--o{ POSITION_SOURCES : "cites"
+  SOURCES ||--o{ POSITION_SOURCES : "cited in"
+  POSITION_VERSIONS ||--o{ SOCIAL_POSTS : "drafts"
+
+  ISSUES {
+    int id PK
+    string slug UK
+    text question
+    string status
+  }
+  POLICIES {
+    int id PK
+    string slug UK
+    string title
+    int issue_id FK
+  }
+  CONSTITUTION_VERSIONS {
+    int id PK
+    int version
+    text principles_json
+    string checksum
+    string status
+  }
+  POSITION_VERSIONS {
+    int id PK
+    int policy_id FK
+    int constitution_version_id FK
+    int version
+    string status
+    string kind
+    float confidence
+    text position_md
+    text key_claims_json
+    text oversight_flags_json
+  }
+  SOURCES {
+    int id PK
+    string url
+    int tier
+    string publisher
+    string origin
+  }
+  POSITION_SOURCES {
+    int id PK
+    int position_version_id FK
+    int source_id FK
+  }
+  REASONING_LOGS {
+    int id PK
+    int position_version_id FK
+    string step
+    string agent
+    int output_tokens
+  }
+  SOCIAL_POSTS {
+    int id PK
+    int position_version_id FK
+    string platform
+    string status
+  }
+  STATEMENTS {
+    int id PK
+    string slug UK
+    text body_md
+    string status
+  }
+  CHANGELOG_ENTRIES {
+    int id PK
+    string entity_slug
+    string change_type
+    text summary
+  }
+</pre>
+    </div>
+    <div class="legend">
+      <span><b>PK</b> primary key</span>
+      <span><b>FK</b> foreign key</span>
+      <span><b>UK</b> unique key</span>
+      <span><b>one&nbsp;──&lt;&nbsp;many</b> (a policy has many versions)</span>
+    </div>
+    <div class="note">
+      <span class="k">AUDIT</span>
+      <span>The audit log isn't a table — it's a separate append-only file where each entry embeds
+        the SHA-256 hash of the entry before it. Editing or deleting any past record breaks the
+        chain, so the history is tamper-evident. <span style="color:var(--muted)">STATEMENTS and
+        CHANGELOG_ENTRIES stand alone (the changelog references entities by slug, not a foreign key).</span></span>
+    </div>
+  </section>
+
+  <footer>
+    Private project by Mason Tatafu · diagrams generated from the live SQLAlchemy models.
+    Public output is a read-only static site; there is no public chatbot.
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, securityLevel:"loose", flowchart:{htmlLabels:true}});</script>
+</body>
+</html>
