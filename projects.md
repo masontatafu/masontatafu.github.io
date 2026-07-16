@@ -35,8 +35,8 @@ Selected projects are presented as case studies rather than public source code, 
     <span class="tag">Audit Logging</span>
   </div>
   <div class="project-links">
-    <a href="/assets/docs/AI-Politician-Case-Study.pdf" target="_blank" rel="noopener noreferrer">View case study</a>
-    <a href="/assets/docs/ai-politician-system.html" target="_blank" rel="noopener noreferrer">View system model</a>
+    <a href="AI-Politician-Case-Study.pdf" target="_blank" rel="noopener noreferrer">View case study</a>
+    <a href="ai-politician-system.html" target="_blank" rel="noopener noreferrer">View system model</a>
   </div>
 </div>
 
