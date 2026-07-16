@@ -19,6 +19,28 @@ Selected projects are presented as case studies rather than public source code, 
 <div class="project-grid">
 
 <div class="project-card">
+  <h3>AI Politician — Evidence-Constrained Political Reasoning System</h3>
+  <p>
+    Built an AI-assisted political reasoning system designed to generate sourced, versioned, and auditable policy positions for Australian political issues. The system uses a fixed reasoning pipeline with evidence gathering, drafting, critique, revision, inversion testing, automated quality gates, freshness tracking, corrections handling, and tamper-evident audit logging.
+  </p>
+  <div class="project-tags">
+    <span class="tag">Python</span>
+    <span class="tag">SQLAlchemy</span>
+    <span class="tag">SQLite</span>
+    <span class="tag">Claude API</span>
+    <span class="tag">FastAPI</span>
+    <span class="tag">Jinja2</span>
+    <span class="tag">pytest</span>
+    <span class="tag">Structured Outputs</span>
+    <span class="tag">Audit Logging</span>
+  </div>
+  <div class="project-links">
+    <a href="/assets/docs/AI-Politician-Case-Study.pdf" target="_blank" rel="noopener noreferrer">View case study</a>
+    <a href="/assets/docs/ai-politician-system.html" target="_blank" rel="noopener noreferrer">View system model</a>
+  </div>
+</div>
+
+<div class="project-card">
   <h3>SEEK Workflow Automation Agent</h3>
   <p>Built a Python-based workflow automation system to support job discovery, application tracking, resume selection, question handling, logging, review workflows, and metrics reporting. The project focused on turning a repetitive manual process into a structured, explainable, and testable workflow.</p>
   <div class="project-tags">
