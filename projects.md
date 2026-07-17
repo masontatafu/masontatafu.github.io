@@ -66,8 +66,8 @@ Selected projects are presented as case studies rather than public source code, 
     <span class="tag">Safety Controls</span>
     <span class="tag">Documentation</span>
   </div>
-  <!-- Replace # with the public Confluence/PDF case study link when ready. -->
-  <a href="#" target="_blank" rel="noopener noreferrer">Case study coming soon</a>
+  <a href="gmail-agent-case-study.pdf" target="_blank" rel="noopener noreferrer">View Case Study</a>
+  <a href="gmail-agent-system.html" target="_blank" rel="noopener noreferrer">View System Model</a>
 </div>
 
 <div class="project-card">
