@@ -35,8 +35,8 @@ Selected projects are presented as case studies rather than public source code, 
     <span class="tag">Audit Logging</span>
   </div>
   <div class="project-links">
-    <a href="AI-Politician-Case-Study.pdf" target="_blank" rel="noopener noreferrer">View case study</a>
-    <a href="ai-politician-system.html" target="_blank" rel="noopener noreferrer">View system model</a>
+    <a href="AI-Politician-Case-Study.pdf" target="_blank" rel="noopener noreferrer">View Case Study</a>
+    <a href="ai-politician-system.html" target="_blank" rel="noopener noreferrer">View System Model</a>
   </div>
 </div>
 
@@ -51,8 +51,8 @@ Selected projects are presented as case studies rather than public source code, 
     <span class="tag">Testing</span>
     <span class="tag">Metrics</span>
   </div>
-  <!-- Replace # with the public Confluence/PDF case study link when ready. -->
-  <a href="#" target="_blank" rel="noopener noreferrer">Case study coming soon</a>
+  <a href="SEEK-Agent-Case-Study.pdf" target="_blank" rel="noopener noreferrer">View Case Study</a>
+  <a href="seek-agent-system.html" target="_blank" rel="noopener noreferrer">View System Model</a>
 </div>
 
 <div class="project-card">
