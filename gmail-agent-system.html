@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gmail Sorting Agent — System &amp; Data Model</title>
+<style>
+  :root {
+    --paper: #faf8f4; --card: #ffffff; --ink: #22262f; --muted: #5d6572;
+    --line: #e6e2d9; --navy: #16324f; --navy-soft: #2c5680; --gold: #b3872c;
+    --gold-soft: #d9c491; --plate: #fbfaf6; --plate-line: #e4dfd4;
+    --chip: #eef1f5; --chip-ink: #3c5670;
+    --stop: #9c3d2e; --stop-soft: #e8d3ce;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: "SFMono-Regular", ui-monospace, "JetBrains Mono", Menlo, Consolas, monospace;
+    --shadow: 0 1px 2px rgba(20,30,50,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #12161d; --card: #1a212c; --ink: #e7e5df; --muted: #9aa3b0;
+      --line: #2a3140; --navy: #a9c6e2; --navy-soft: #8fb4d9; --gold: #d6ab5b;
+      --gold-soft: #4a3d1f; --chip: #232b38; --chip-ink: #b9c6d6;
+      --stop: #d98878; --stop-soft: #4a2a24;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12161d; --card: #1a212c; --ink: #e7e5df; --muted: #9aa3b0;
+    --line: #2a3140; --navy: #a9c6e2; --navy-soft: #8fb4d9; --gold: #d6ab5b;
+    --gold-soft: #4a3d1f; --chip: #232b38; --chip-ink: #b9c6d6;
+    --stop: #d98878; --stop-soft: #4a2a24;
+  }
+  :root[data-theme="light"] {
+    --paper: #faf8f4; --card: #ffffff; --ink: #22262f; --muted: #5d6572;
+    --line: #e6e2d9; --navy: #16324f; --navy-soft: #2c5680; --gold: #b3872c;
+    --gold-soft: #d9c491; --chip: #eef1f5; --chip-ink: #3c5670;
+    --stop: #9c3d2e; --stop-soft: #e8d3ce;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font-family: var(--sans); line-height: 1.6;
+         -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 3rem 1.4rem 4rem; }
+
+  header { border-top: 4px solid var(--gold); padding-top: 1.6rem; }
+  .eyebrow { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+             color: var(--gold); font-weight: 700; margin: 0 0 .5rem; }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.9rem, 4vw, 2.7rem);
+       margin: 0 0 .5rem; letter-spacing: .01em; text-wrap: balance; }
+  .lede { font-size: 1.08rem; color: var(--muted); max-width: 62ch; margin: 0; }
+
+  .stack { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1.4rem 0 0; }
+  .tag { font-family: var(--mono); font-size: .74rem; background: var(--chip);
+         color: var(--chip-ink); border-radius: 5px; padding: .28rem .55rem; }
+
+  section { margin-top: 3.4rem; }
+  .sec-head { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap;
+              border-bottom: 1px solid var(--line); padding-bottom: .5rem; margin-bottom: .3rem; }
+  .sec-num { font-family: var(--mono); font-size: .85rem; color: var(--gold); font-weight: 700; }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; margin: 0; }
+  .sec-sub { color: var(--muted); font-size: .95rem; margin: .6rem 0 1.3rem; max-width: 68ch; }
+  p.body { max-width: 68ch; }
+  p.body .eg { font-style: italic; color: var(--ink); }
+
+  .plate { background: var(--plate); border: 1px solid var(--plate-line);
+           border-radius: 12px; padding: 1.4rem 1rem; overflow-x: auto;
+           box-shadow: 0 1px 2px rgba(20,30,50,.05), 0 10px 30px rgba(20,30,50,.06); }
+  .plate pre.mermaid { margin: 0; text-align: center; min-width: 520px; }
+  .cap { text-align: center; font-size: .8rem; color: var(--muted); margin: .9rem 0 0; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 1rem 0 0;
+            font-size: .82rem; color: var(--muted); font-family: var(--mono); }
+  .legend b { color: var(--ink); font-weight: 600; }
+
+  .note { display: flex; gap: .7rem; margin-top: 1.2rem; padding: .9rem 1.1rem;
+          background: color-mix(in srgb, var(--gold) 9%, transparent);
+          border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0;
+          font-size: .9rem; }
+  .note .k { font-family: var(--mono); color: var(--gold); font-weight: 700;
+             flex-shrink: 0; }
+  .note.stop { background: color-mix(in srgb, var(--stop) 9%, transparent);
+               border-left-color: var(--stop); }
+  .note.stop .k { color: var(--stop); }
+
+  /* the two rules in tension — the thesis */
+  .rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+           gap: 1rem; margin: 1.6rem 0 0; }
+  .rule { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+          padding: 1.1rem 1.25rem; box-shadow: var(--shadow); }
+  .rule .rk { font-family: var(--mono); font-size: .7rem; letter-spacing: .12em;
+              text-transform: uppercase; font-weight: 700; margin-bottom: .4rem; }
+  .rule.go .rk { color: var(--navy-soft); }
+  .rule.no .rk { color: var(--stop); }
+  .rule.go { border-left: 3px solid var(--navy-soft); }
+  .rule.no { border-left: 3px solid var(--stop); }
+  .rule b { font-family: var(--serif); font-size: 1.08rem; display: block; margin-bottom: .3rem; }
+  .rule p { margin: 0; color: var(--muted); font-size: .93rem; }
+  .verdict { margin-top: 1.2rem; padding: 1rem 1.2rem; border: 1px dashed var(--gold-soft);
+             border-radius: 10px; font-family: var(--serif); font-size: 1.1rem;
+             text-align: center; background: color-mix(in srgb, var(--gold) 5%, transparent); }
+  .verdict b { color: var(--gold); }
+
+/* plain-English journey */
+  .journey { margin-top: 1.4rem; }
+  .step { position: relative; display: grid; grid-template-columns: 2.5rem 1fr;
+          gap: .3rem 1.15rem; padding-bottom: 1.7rem; }
+  .step:not(:last-child)::before { content: ""; position: absolute; left: 1.2rem;
+          top: 2.7rem; bottom: -.1rem; width: 2px; background: var(--line); }
+  .step-num { grid-row: span 2; width: 2.5rem; height: 2.5rem; border-radius: 50%;
+              display: grid; place-items: center; font-family: var(--sans);
+              font-weight: 700; font-size: 1rem; background: var(--navy);
+              color: var(--paper); position: relative; z-index: 1; }
+  .step-t { font-family: var(--serif); font-weight: 600; font-size: 1.12rem;
+            align-self: center; }
+  .step-d { color: var(--muted); font-size: .96rem; margin: 0; }
+  .step-d .eg { color: var(--ink); font-style: italic; }
+  .step.loop .step-num { background: var(--card); color: var(--gold);
+            border: 2px solid var(--gold); }
+  .loop-chip { display: inline-block; margin-top: .5rem; font-family: var(--mono);
+            font-size: .76rem; color: var(--gold); border: 1px solid var(--gold-soft);
+            border-radius: 999px; padding: .2rem .7rem; }
+  /* guardrail cards */
+  .honest { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem; margin-top: 1.4rem; }
+  .hcard { background: var(--card); border: 1px solid var(--line);
+           border-left: 3px solid var(--gold); border-radius: 8px;
+           padding: 1rem 1.15rem; box-shadow: var(--shadow); }
+  .hcard b { font-family: var(--serif); font-size: 1.04rem; display: block;
+             margin-bottom: .25rem; }
+  .hcard p { margin: 0; color: var(--muted); font-size: .93rem; }
+
+  /* component table */
+  table { width: 100%; border-collapse: collapse; margin-top: 1.3rem; font-size: .93rem; }
+  thead th { text-align: left; font-family: var(--mono); font-size: .7rem;
+             letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+             font-weight: 700; border-bottom: 1px solid var(--line); padding: 0 .8rem .55rem 0; }
+  tbody td { border-bottom: 1px solid var(--line); padding: .75rem .8rem .75rem 0;
+             vertical-align: top; color: var(--muted); }
+  tbody td:first-child { font-family: var(--mono); font-size: .82rem; color: var(--navy);
+             white-space: nowrap; font-weight: 600; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* outcomes */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+           gap: 1px; background: var(--line); border: 1px solid var(--line);
+           border-radius: 10px; overflow: hidden; margin-top: 1.4rem; }
+  .stat { background: var(--card); padding: 1.3rem 1rem; text-align: center; }
+  .stat .n { font-family: var(--serif); font-size: 2rem; font-weight: 600;
+             color: var(--navy); line-height: 1; display: block; }
+  .stat .l { font-family: var(--mono); font-size: .66rem; letter-spacing: .11em;
+             text-transform: uppercase; color: var(--muted); margin-top: .45rem;
+             display: block; }
+  .skills { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.4rem; }
+  .skill { font-size: .8rem; border: 1px solid var(--line); border-radius: 999px;
+           padding: .3rem .75rem; color: var(--muted); background: var(--card); }
+
+  footer { margin-top: 3.6rem; border-top: 1px solid var(--line); padding-top: 1.2rem;
+           color: var(--muted); font-size: .82rem; max-width: 70ch; }
+  a { color: var(--navy-soft); }
+
+  /* hand-built flow diagram — pure HTML/CSS, cannot clip, theme-aware */
+  .flow { display:flex; flex-direction:column; align-items:center; gap:.55rem;
+          font-family:var(--sans); padding:.4rem 0; }
+  .frow, .fbranch { display:flex; flex-wrap:wrap; justify-content:center;
+                    align-items:center; gap:.5rem; }
+  .fbranch { align-items:flex-start; gap:1.6rem; margin-top:.2rem; }
+  .fcol { display:flex; flex-direction:column; align-items:center; gap:.4rem; }
+  .fnode { background:var(--card); border:1px solid var(--line); border-radius:9px;
+           padding:.5rem .85rem; font-size:.9rem; text-align:center;
+           box-shadow:0 1px 2px rgba(20,30,50,.06); max-width:16rem; }
+  .fnode b { color:var(--navy); }
+  .fnode small, .fstep small { display:block; font-size:.72rem; color:var(--muted);
+           margin-top:.14rem; font-weight:400; }
+  .fnode.accent { border-color:var(--gold); border-width:1.5px; }
+  .fnode.muted { border-style:dashed; color:var(--muted); }
+  .fnode.stop { border-color:var(--stop); border-width:1.5px; }
+  .fnode.stop b { color:var(--stop); }
+  .fstep { background:var(--chip); border:1px solid var(--line); border-radius:8px;
+           padding:.45rem .7rem; font-size:.85rem; text-align:center; }
+  .fgate { background:var(--card); border:1.5px solid var(--gold); border-radius:9px;
+           padding:.5rem 1.1rem; font-weight:600; font-size:.9rem; }
+  .farrow { color:var(--gold); font-size:1.15rem; line-height:1; }
+  .fchev { color:var(--muted); font-size:1rem; }
+  .flabel { font-size:.72rem; color:var(--muted); font-family:var(--mono); }
+  .frail { margin-top:.4rem; font-size:.78rem; color:var(--muted); font-style:italic;
+           border-top:1px dashed var(--line); padding-top:.5rem; text-align:center; }
+
+  /* SIGNATURE — the answer cascade with the guard spanning every tier */
+  .cascade { display:grid; grid-template-columns: 1fr auto; gap:0 1.1rem;
+             align-items:stretch; max-width:44rem; margin:0 auto; }
+  .tiers { display:flex; flex-direction:column; gap:.5rem; }
+  .tier { display:grid; grid-template-columns:1.6rem 1fr auto; gap:.85rem;
+          align-items:center; background:var(--card); border:1px solid var(--line);
+          border-radius:9px; padding:.65rem .9rem; box-shadow:var(--shadow); }
+  .tier .tn { font-family:var(--mono); font-size:.74rem; color:var(--gold); font-weight:700; }
+  .tier .tt { font-size:.92rem; }
+  .tier .tt b { color:var(--navy); }
+  .tier .tt small { display:block; font-size:.74rem; color:var(--muted); margin-top:.1rem; }
+  .cost { font-family:var(--mono); font-size:.7rem; border-radius:999px;
+          padding:.2rem .6rem; white-space:nowrap; border:1px solid var(--line);
+          color:var(--muted); }
+  .cost.free { border-color:var(--gold-soft); color:var(--gold); }
+  .cost.paid { border-color:var(--navy-soft); color:var(--navy-soft); }
+  .fall { text-align:center; color:var(--muted); font-size:.72rem;
+          font-family:var(--mono); margin:-.15rem 0; }
+  .guard { display:flex; flex-direction:column; align-items:center;
+           justify-content:center; gap:.6rem; border:1.5px solid var(--stop);
+           border-radius:9px; padding:.9rem .55rem; background:var(--card);
+           min-width:3.4rem; }
+  .guard .gtxt { writing-mode:vertical-rl; transform:rotate(180deg);
+           font-family:var(--mono); font-size:.72rem; letter-spacing:.1em;
+           text-transform:uppercase; color:var(--stop); font-weight:700; }
+  .guard .gsub { writing-mode:vertical-rl; transform:rotate(180deg);
+           font-size:.68rem; color:var(--muted); }
+  .cascade-out { display:flex; justify-content:center; gap:.5rem; margin-top:.7rem;
+           flex-wrap:wrap; }
+  @media (max-width: 620px) {
+    .cascade { grid-template-columns:1fr; gap:.9rem; }
+    .guard { flex-direction:row; padding:.5rem .9rem; }
+    .guard .gtxt, .guard .gsub { writing-mode:horizontal-tb; transform:none; }
+  }
+
+  :where(a, button):focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+  @media print {
+    :root { --paper:#fff; --card:#fff; --ink:#111; --muted:#555; }
+    .wrap { max-width:none; padding:0; }
+    .plate, .tier, .hcard, .rule, .stat, .guard, .dcard { box-shadow:none; }
+    section { margin-top:2.1rem; }
+    /* protect atomic blocks only — avoiding breaks on whole sections strands pages */
+    .plate, .stats, .cascade, .hcard, .rule, .stat, .tier, .note, .verdict,
+    .flow, tr, .stat .n, .step, .dcard { break-inside:avoid; page-break-inside:avoid; }
+    /* never orphan a heading at the foot of a page */
+    .sec-head, h1, h2, thead { break-after:avoid; page-break-after:avoid; }
+    .lede, .sec-sub { break-before:avoid; }
+    p.body { orphans:3; widows:3; }
+  }
+
+  /* Mermaid bakes an inline max-width at render time, sized to whatever the
+     viewport was when it ran. On a narrower page (print, mobile) that inline
+     value stops the SVG shrinking and .plate's overflow-x clips it instead of
+     scaling. Force it to fit its container; the viewBox handles the scaling. */
+  .plate pre.mermaid svg { max-width: 100% !important; height: auto; }
+
+  /* decisions & bug post-mortems (case study) */
+  .dlist { margin-top: 1.4rem; display: flex; flex-direction: column; gap: 1rem; }
+  .dcard { background: var(--card); border: 1px solid var(--line);
+           border-left: 3px solid var(--navy-soft); border-radius: 8px;
+           padding: 1.1rem 1.25rem; box-shadow: var(--shadow); }
+  .dcard .dk { font-family: var(--mono); font-size: .68rem; letter-spacing: .12em;
+               text-transform: uppercase; color: var(--navy-soft); font-weight: 700;
+               margin-bottom: .35rem; }
+  .dcard b.dt { font-family: var(--serif); font-size: 1.1rem; display: block;
+                margin-bottom: .45rem; font-weight: 600; }
+  .dcard p { margin: 0 0 .55rem; color: var(--muted); font-size: .93rem; max-width: 74ch; }
+  .dcard p:last-child { margin-bottom: 0; }
+  .dcard .res { color: var(--ink); }
+  .dcard .res b { color: var(--navy-soft); }
+  .dcard.bug { border-left-color: var(--stop); }
+  .dcard.bug .dk, .dcard.bug .res b { color: var(--stop); }
+  .dcard.open { border-left-color: var(--gold); }
+  .dcard.open .dk, .dcard.open .res b { color: var(--gold); }
+</style>
+
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Personal project · System &amp; data model</p>
+    <h1>Gmail Sorting Agent</h1>
+    <p class="lede">An agent that reads a job-search inbox, works out what each email actually is,
+      and clears the noise out — under one rule: it is allowed to leave junk in your inbox, but it
+      is never allowed to bury an interview.</p>
+    <div class="stack">
+      <span class="tag">Python</span>
+      <span class="tag">Gmail API (OAuth2)</span>
+      <span class="tag">Claude API (Haiku)</span>
+      <span class="tag">JSON local memory</span>
+      <span class="tag">85 tests</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>In plain English — the whole journey</h2>
+    </div>
+    <p class="sec-sub">No jargon. Here is what happens from the moment you ask it to tidy your inbox
+      to the moment an email leaves it — and why it gets cheaper every time it runs.</p>
+    <div class="journey">
+      <div class="step">
+        <span class="step-num">1</span>
+        <span class="step-t">You tell it how far back to look</span>
+        <p class="step-d">A week, usually — <span class="eg">"the last 7 days"</span>. It searches
+          your inbox the way you would, and it caps how much it will archive in one go.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <span class="step-t">It skips what it has already dealt with</span>
+        <p class="step-d">It owns twelve labels. Anything already wearing one is excluded from the
+          search itself, so a daily run only looks at genuinely new mail.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span class="step-t">It decides whether the email is even about your job search</span>
+        <p class="step-d">Most of your inbox isn't. Those emails are left completely alone — not
+          labelled, not touched. It would rather ignore an email than guess at one.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <span class="step-t">It tries to recognise the email for free</span>
+        <p class="step-d">First your own corrections, then its pattern rules, then templates it has
+          been taught, then senders it knows. A job alert from SEEK looks like every other job alert
+          from SEEK — that costs nothing to know.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <span class="step-t">It asks the AI only when it is genuinely stuck</span>
+        <p class="step-d">And only if you switched the AI on for that run, and only until it hits the
+          call budget you set. There is no way for a run to quietly spend money you didn't expect.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">6</span>
+        <span class="step-t">When it isn't sure, it leaves the email alone</span>
+        <p class="step-d">Not sure is a real answer, and it's the default one. The email gets a
+          <span class="eg">Review Manually</span> label and stays exactly where it is. An unsure
+          email is never archived — there is no code path that allows it.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">7</span>
+        <span class="step-t">It shows you the whole plan before it touches anything</span>
+        <p class="step-d">Every label it intends to apply, every email it intends to archive, listed
+          out — then it waits. Say no and nothing happens at all. Nothing is ever deleted; archiving
+          only means taking it out of the inbox.</p>
+      </div>
+      <div class="step loop">
+        <span class="step-num">8</span>
+        <span class="step-t">It writes down everything, so it can be undone — and so it can learn</span>
+        <p class="step-d">Every action is logged against a run ID, so a whole run can be reversed.
+          And once a sender has been sorted the same way enough times, the agent can propose a rule
+          for it — you approve it, and that sender never needs the AI again.
+          <br><span class="loop-chip">↺ loops back to step 4</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>What keeps it safe — in plain words</h2>
+    </div>
+    <p class="sec-sub">An agent clearing your inbox has an obvious temptation: archive more, because
+      archiving is the visible win. These are the guardrails against that, each in one sentence.
+      Every one is a rule in code with a test behind it — not a polite request in a prompt.</p>
+    <div class="honest">
+      <div class="hcard"><b>Uncertainty is never archived</b><p>Anything it can't place confidently
+        becomes <i>Review Manually</i> and stays in the inbox. The fallback isn't a guess — it's
+        leaving the email alone.</p></div>
+      <div class="hcard"><b>A known sender can't bury a real task</b><p>If an email shows interview,
+        assessment, document or offer language, every archive-shaped rule is suppressed. A noisy
+        sender doesn't get to hide the one message that mattered.</p></div>
+      <div class="hcard"><b>It doesn't trust its own AI</b><p>A model answer passes the same gate as
+        everything else: the category must be archivable and confidence at least 0.80. A category it
+        doesn't recognise is forced to <i>Review Manually</i>.</p></div>
+      <div class="hcard"><b>It reads the body, not just the subject</b><p><i>"Thank you for your
+        application"</i> that also says <i>"confirm your residency"</i> is a task, not a receipt.
+        A specific request in the body overrides a reassuring subject line.</p></div>
+      <div class="hcard"><b>It cannot delete anything</b><p>Archiving removes one label. Everything
+        stays in All Mail, fully searchable. The permission it holds can't send mail or delete it —
+        that isn't policy, it's the scope it was granted.</p></div>
+      <div class="hcard"><b>Every run can be reversed</b><p>Each run has an ID and every label and
+        archive is recorded with the email's prior state. One command replays a run backwards and
+        makes the agent forget it ever touched those emails.</p></div>
+      <div class="hcard"><b>It can't spend without being asked</b><p>The AI is off unless you turn it
+        on, and capped when you do. Once the budget is gone the remaining emails become <i>Review
+        Manually</i> rather than more spend.</p></div>
+      <div class="hcard"><b>It shows its work before acting</b><p>A dry run writes nothing at all.
+        A real run prints the full plan and waits for a yes — and if you abort, no state is written
+        and nothing is remembered.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>The same journey, in detail</h2>
+    </div>
+    <p class="sec-sub">Every email runs through a fixed funnel. Most of the inbox is eliminated at
+      the relevance gate for free and never touched again; only job-search mail reaches the
+      classifier, and only confident, archivable classifications reach the inbox itself.</p>
+    <div class="plate">
+      <div class="flow">
+        <div class="fnode accent"><b>Fetch</b><small>inbox only, minus the 12 labels it already owns</small></div>
+        <div class="farrow">↓</div>
+        <div class="frow">
+          <div class="fstep">1 · Relevance gate<small>denylist runs first</small></div>
+          <div class="fchev">→</div>
+          <div class="fstep">2 · Classify<small>cheapest source first</small></div>
+          <div class="fchev">→</div>
+          <div class="fstep">3 · Archive gate<small>category + confidence ≥ 0.80</small></div>
+        </div>
+        <div class="farrow">↓</div>
+        <div class="fgate">Apply plan — printed in full, waits for confirmation</div>
+        <div class="fbranch">
+          <div class="fcol">
+            <div class="flabel">noise · confident</div>
+            <div class="fnode accent"><b>Label + archive</b><small>out of the inbox</small></div>
+            <div class="farrow">↓</div>
+            <div class="fnode accent">Logged for undo<small>run id, labels, prior state</small></div>
+          </div>
+          <div class="fcol">
+            <div class="flabel">action needed · or unsure</div>
+            <div class="fnode stop"><b>Label + keep</b><small>stays in the inbox</small></div>
+          </div>
+        </div>
+        <div class="frail">Not job-related? Left completely untouched — never labelled, never archived.</div>
+      </div>
+    </div>
+    <div class="note">
+      <span class="k">TWO GATES</span>
+      <span>The two gates fail in opposite directions, on purpose. The <b>relevance gate</b> is
+        deliberately generous — it would rather admit a newsletter than miss a real application, so
+        a wrong answer here only costs a label. The <b>archive gate</b> is deliberately strict — an
+        email leaves the inbox only if its category is archivable <i>and</i> confidence clears 0.80,
+        because a wrong answer here costs an opportunity.</span>
+    </div>
+    <div class="note stop">
+      <span class="k">ELEVEN LABELS</span>
+      <span>Six categories always stay in the inbox — <i>interview invite</i>, <i>assessment due</i>,
+        <i>recruiter message</i>, <i>documents needed</i>, <i>offer</i>, and <i>review manually</i>.
+        Five can be archived: <i>applied</i>, <i>rejection</i>, <i>application viewed</i>,
+        <i>job alerts</i>, <i>platform noise</i>. Which list a category sits on is data, not
+        judgement — a rule cannot archive a keep-in-inbox category even when it explicitly claims
+        it's safe to.</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>Classifying an email — cheapest source first</h2>
+    </div>
+    <p class="sec-sub">The distinctive part. Four local sources are exhausted before a single API
+      call, and the model isn't reached at all unless it was explicitly switched on for that run.
+      One gate sits across all six tiers — including the model's own answer.</p>
+    <div class="plate">
+      <div class="cascade">
+        <div class="tiers">
+          <div class="tier">
+            <span class="tn">01</span>
+            <span class="tt"><b>Manual override</b><small>your explicit correction — beats everything below</small></span>
+            <span class="cost free">no call</span>
+          </div>
+          <div class="fall">↓ falls through</div>
+          <div class="tier">
+            <span class="tn">02</span>
+            <span class="tt"><b>Tier 1 rules</b><small>deterministic patterns — must clear 0.75 to be trusted</small></span>
+            <span class="cost free">no call</span>
+          </div>
+          <div class="fall">↓ falls through</div>
+          <div class="tier">
+            <span class="tn">03</span>
+            <span class="tt"><b>Template rules</b><small>sender + body marker — "answer a few questions"</small></span>
+            <span class="cost free">no call</span>
+          </div>
+          <div class="fall">↓ falls through</div>
+          <div class="tier">
+            <span class="tn">04</span>
+            <span class="tt"><b>Sender rules</b><small>senders that always mean the same thing</small></span>
+            <span class="cost free">no call</span>
+          </div>
+          <div class="fall">↓ falls through</div>
+          <div class="tier">
+            <span class="tn">05</span>
+            <span class="tt"><b>Claude</b><small>genuinely unfamiliar — only if enabled, only within budget</small></span>
+            <span class="cost paid">API call</span>
+          </div>
+          <div class="fall">↓ falls through</div>
+          <div class="tier">
+            <span class="tn">06</span>
+            <span class="tt"><b>Review manually</b><small>the default answer, not the last resort</small></span>
+            <span class="cost free">no call</span>
+          </div>
+        </div>
+        <div class="guard">
+          <span class="gtxt">Archive gate</span>
+          <span class="gsub">every tier · no exceptions</span>
+        </div>
+      </div>
+      <div class="cascade-out">
+        <div class="fnode accent"><b>Archived</b><small>removed from the inbox</small></div>
+        <div class="fnode muted">Labelled, kept<small>needs your action</small></div>
+        <div class="fnode stop"><b>Review manually</b><small>never archived</small></div>
+      </div>
+      <p class="cap">Figure 1 — The six-tier classification cascade. Four free sources are exhausted before a single API call is made, and the gate spans every tier: the model's own answer is not trusted merely because a model produced it.</p>
+    </div>
+    <div class="note">
+      <span class="k">ORDER</span>
+      <span>Tier 1 sits <b>above</b> the sender and template rules, which is the opposite of the
+        obvious arrangement — rules are cheaper, so why not check them first? Because a broad rule
+        that fires early is a rule that can archive something before anything has read the body.
+        The cheap rules fill the gap <i>below</i> Tier 1's confidence threshold instead — which is
+        precisely where the API calls were coming from.</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2>Local memory — the data model</h2>
+    </div>
+    <p class="sec-sub">There is no database. Memory is four rule files, one state file and two logs
+      on disk — the right shape for a single-user agent whose rules must be readable,
+      hand-correctable and diffable in Git. The relationship that matters is the loop at the bottom:
+      <b>decisions_log</b> is mined into <b>sender_rules</b>, so the agent's own past is what makes
+      its future free.</p>
+    <div class="plate">
+<pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontFamily':'-apple-system,Segoe UI,Roboto,sans-serif','fontSize':'13px','primaryColor':'#f4f1e8','primaryTextColor':'#20303f','primaryBorderColor':'#16324f','lineColor':'#16324f'}}}%%
+erDiagram
+  IRRELEVANT_SENDERS ||--o{ EMAIL_STATE : "gates before all"
+  MANUAL_OVERRIDES   ||--o{ EMAIL_STATE : "wins first"
+  TEMPLATE_RULES     ||--o{ EMAIL_STATE : "then"
+  SENDER_RULES       ||--o{ EMAIL_STATE : "then"
+  EMAIL_STATE   ||--o{ ACTIONS_LOG   : "produces"
+  ACTIONS_LOG   ||--o{ EMAIL_STATE   : "undo forgets"
+  EMAIL_STATE   ||--o{ DECISIONS_LOG : "writes"
+  DECISIONS_LOG ||--o{ SENDER_RULES  : "suggests · human approves"
+
+  IRRELEVANT_SENDERS {
+    list sender_contains "never job-related"
+    list domains
+  }
+  MANUAL_OVERRIDES {
+    string name PK
+    list   sender_contains
+    list   subject_contains
+    list   body_contains_any
+    string classification
+    bool   safe_to_archive "explicit"
+    float  confidence
+  }
+  TEMPLATE_RULES {
+    string name PK
+    list   sender_contains
+    list   body_contains_any "action markers"
+    string classification
+    float  confidence
+  }
+  SENDER_RULES {
+    string name PK
+    list   sender_contains
+    list   domain_equals
+    string classification
+    float  confidence
+  }
+  EMAIL_STATE {
+    string message_id PK
+    string classification
+    list   labels
+    bool   safe_to_archive
+    string subject
+    string classified_at
+    string labelled_at "null until applied"
+    string archived_at "null until archived"
+  }
+  DECISIONS_LOG {
+    string timestamp
+    string message_id
+    string sender
+    string subject
+    string phase "fetch · classify · apply"
+    string classification
+    float  confidence
+    string source "override · tier1 · template · sender · claude"
+    list   evidence
+  }
+  ACTIONS_LOG {
+    string run_id PK
+    string message_id
+    string action "labels_applied · archived"
+    list   label_ids_added
+    list   label_ids_before "for undo"
+  }
+</pre>
+    </div>
+    <div class="legend">
+      <span><b>PK</b> key field</span>
+      <span><b>one&nbsp;──&lt;&nbsp;many</b> (one log suggests many rules)</span>
+      <span><b>JSON</b> document stores, not tables</span>
+    </div>
+    <p class="cap">Figure 2 — Four rule files, one state file, two logs. The bottom edge is the learning loop; the edge above it is undo, running the other way.</p>
+    <div class="note">
+      <span class="k">WHY JSON</span>
+      <span>A relational store would be the reflex choice and the wrong one here. The rules are
+        edited by hand constantly — a wrongly archived email is fixed by opening a file and adding
+        four lines. Keeping memory as readable documents means every rule change is reviewable in a
+        Git diff, and the safety-critical ones stay legible to the person accountable for them.</span>
+    </div>
+    <div class="note stop">
+      <span class="k">THREE STATES</span>
+      <span>An email is <b>classified</b>, then <b>labelled</b>, then <b>archived</b> — three
+        separate timestamps, not one "processed" flag. That distinction is load-bearing: a flat
+        processed list once marked labelled emails as finished, so the archive pass skipped them
+        and they sat in the inbox wearing a label forever. Failed actions never write a timestamp,
+        and a dry run writes nothing at all.</span>
+    </div>
+  </section>
+
+  <footer>
+    Personal project by Mason Tatafu · figures taken from the agent's own logs
+    (<span style="font-family:var(--mono);font-size:.9em">decisions.jsonl</span>,
+    <span style="font-family:var(--mono);font-size:.9em">actions.jsonl</span>,
+    <span style="font-family:var(--mono);font-size:.9em">email_state.json</span>) and a run of its
+    live test suite. The agent runs locally on Mason's own inbox under a
+    <span style="font-family:var(--mono);font-size:.9em">gmail.modify</span> scope that cannot send
+    or delete mail; the API key and OAuth token are kept out of source control.
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, securityLevel:"loose", flowchart:{htmlLabels:true}});</script>
+</body>
+</html>
