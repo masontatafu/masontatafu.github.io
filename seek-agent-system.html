@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEEK Agent — Case Study &amp; System Model</title>
+<style>
+  :root {
+    --paper: #faf8f4; --card: #ffffff; --ink: #22262f; --muted: #5d6572;
+    --line: #e6e2d9; --navy: #16324f; --navy-soft: #2c5680; --gold: #b3872c;
+    --gold-soft: #d9c491; --plate: #fbfaf6; --plate-line: #e4dfd4;
+    --chip: #eef1f5; --chip-ink: #3c5670;
+    --stop: #9c3d2e; --stop-soft: #e8d3ce;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: "SFMono-Regular", ui-monospace, "JetBrains Mono", Menlo, Consolas, monospace;
+    --shadow: 0 1px 2px rgba(20,30,50,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #12161d; --card: #1a212c; --ink: #e7e5df; --muted: #9aa3b0;
+      --line: #2a3140; --navy: #a9c6e2; --navy-soft: #8fb4d9; --gold: #d6ab5b;
+      --gold-soft: #4a3d1f; --chip: #232b38; --chip-ink: #b9c6d6;
+      --stop: #d98878; --stop-soft: #4a2a24;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12161d; --card: #1a212c; --ink: #e7e5df; --muted: #9aa3b0;
+    --line: #2a3140; --navy: #a9c6e2; --navy-soft: #8fb4d9; --gold: #d6ab5b;
+    --gold-soft: #4a3d1f; --chip: #232b38; --chip-ink: #b9c6d6;
+    --stop: #d98878; --stop-soft: #4a2a24;
+  }
+  :root[data-theme="light"] {
+    --paper: #faf8f4; --card: #ffffff; --ink: #22262f; --muted: #5d6572;
+    --line: #e6e2d9; --navy: #16324f; --navy-soft: #2c5680; --gold: #b3872c;
+    --gold-soft: #d9c491; --chip: #eef1f5; --chip-ink: #3c5670;
+    --stop: #9c3d2e; --stop-soft: #e8d3ce;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font-family: var(--sans); line-height: 1.6;
+         -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 3rem 1.4rem 4rem; }
+
+  header { border-top: 4px solid var(--gold); padding-top: 1.6rem; }
+  .eyebrow { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+             color: var(--gold); font-weight: 700; margin: 0 0 .5rem; }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.9rem, 4vw, 2.7rem);
+       margin: 0 0 .5rem; letter-spacing: .01em; text-wrap: balance; }
+  .lede { font-size: 1.08rem; color: var(--muted); max-width: 62ch; margin: 0; }
+
+  .stack { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1.4rem 0 0; }
+  .tag { font-family: var(--mono); font-size: .74rem; background: var(--chip);
+         color: var(--chip-ink); border-radius: 5px; padding: .28rem .55rem; }
+
+  section { margin-top: 3.4rem; }
+  .sec-head { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap;
+              border-bottom: 1px solid var(--line); padding-bottom: .5rem; margin-bottom: .3rem; }
+  .sec-num { font-family: var(--mono); font-size: .85rem; color: var(--gold); font-weight: 700; }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; margin: 0; }
+  .sec-sub { color: var(--muted); font-size: .95rem; margin: .6rem 0 1.3rem; max-width: 68ch; }
+  p.body { max-width: 68ch; }
+  p.body .eg { font-style: italic; color: var(--ink); }
+
+  .plate { background: var(--plate); border: 1px solid var(--plate-line);
+           border-radius: 12px; padding: 1.4rem 1rem; overflow-x: auto;
+           box-shadow: 0 1px 2px rgba(20,30,50,.05), 0 10px 30px rgba(20,30,50,.06); }
+  .plate pre.mermaid { margin: 0; text-align: center; min-width: 520px; }
+  .cap { text-align: center; font-size: .8rem; color: var(--muted); margin: .9rem 0 0; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 1rem 0 0;
+            font-size: .82rem; color: var(--muted); font-family: var(--mono); }
+  .legend b { color: var(--ink); font-weight: 600; }
+
+  .note { display: flex; gap: .7rem; margin-top: 1.2rem; padding: .9rem 1.1rem;
+          background: color-mix(in srgb, var(--gold) 9%, transparent);
+          border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0;
+          font-size: .9rem; }
+  .note .k { font-family: var(--mono); color: var(--gold); font-weight: 700;
+             flex-shrink: 0; }
+  .note.stop { background: color-mix(in srgb, var(--stop) 9%, transparent);
+               border-left-color: var(--stop); }
+  .note.stop .k { color: var(--stop); }
+
+  /* the two rules in tension — the thesis */
+  .rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+           gap: 1rem; margin: 1.6rem 0 0; }
+  .rule { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+          padding: 1.1rem 1.25rem; box-shadow: var(--shadow); }
+  .rule .rk { font-family: var(--mono); font-size: .7rem; letter-spacing: .12em;
+              text-transform: uppercase; font-weight: 700; margin-bottom: .4rem; }
+  .rule.go .rk { color: var(--navy-soft); }
+  .rule.no .rk { color: var(--stop); }
+  .rule.go { border-left: 3px solid var(--navy-soft); }
+  .rule.no { border-left: 3px solid var(--stop); }
+  .rule b { font-family: var(--serif); font-size: 1.08rem; display: block; margin-bottom: .3rem; }
+  .rule p { margin: 0; color: var(--muted); font-size: .93rem; }
+  .verdict { margin-top: 1.2rem; padding: 1rem 1.2rem; border: 1px dashed var(--gold-soft);
+             border-radius: 10px; font-family: var(--serif); font-size: 1.1rem;
+             text-align: center; background: color-mix(in srgb, var(--gold) 5%, transparent); }
+  .verdict b { color: var(--gold); }
+
+  /* guardrail cards */
+  .honest { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem; margin-top: 1.4rem; }
+  .hcard { background: var(--card); border: 1px solid var(--line);
+           border-left: 3px solid var(--gold); border-radius: 8px;
+           padding: 1rem 1.15rem; box-shadow: var(--shadow); }
+  .hcard b { font-family: var(--serif); font-size: 1.04rem; display: block;
+             margin-bottom: .25rem; }
+  .hcard p { margin: 0; color: var(--muted); font-size: .93rem; }
+
+  /* component table */
+  table { width: 100%; border-collapse: collapse; margin-top: 1.3rem; font-size: .93rem; }
+  thead th { text-align: left; font-family: var(--mono); font-size: .7rem;
+             letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+             font-weight: 700; border-bottom: 1px solid var(--line); padding: 0 .8rem .55rem 0; }
+  tbody td { border-bottom: 1px solid var(--line); padding: .75rem .8rem .75rem 0;
+             vertical-align: top; color: var(--muted); }
+  tbody td:first-child { font-family: var(--mono); font-size: .82rem; color: var(--navy);
+             white-space: nowrap; font-weight: 600; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* outcomes */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+           gap: 1px; background: var(--line); border: 1px solid var(--line);
+           border-radius: 10px; overflow: hidden; margin-top: 1.4rem; }
+  .stat { background: var(--card); padding: 1.3rem 1rem; text-align: center; }
+  .stat .n { font-family: var(--serif); font-size: 2rem; font-weight: 600;
+             color: var(--navy); line-height: 1; display: block; }
+  .stat .l { font-family: var(--mono); font-size: .66rem; letter-spacing: .11em;
+             text-transform: uppercase; color: var(--muted); margin-top: .45rem;
+             display: block; }
+  .skills { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.4rem; }
+  .skill { font-size: .8rem; border: 1px solid var(--line); border-radius: 999px;
+           padding: .3rem .75rem; color: var(--muted); background: var(--card); }
+
+  footer { margin-top: 3.6rem; border-top: 1px solid var(--line); padding-top: 1.2rem;
+           color: var(--muted); font-size: .82rem; max-width: 70ch; }
+  a { color: var(--navy-soft); }
+
+  /* hand-built flow diagram — pure HTML/CSS, cannot clip, theme-aware */
+  .flow { display:flex; flex-direction:column; align-items:center; gap:.55rem;
+          font-family:var(--sans); padding:.4rem 0; }
+  .frow, .fbranch { display:flex; flex-wrap:wrap; justify-content:center;
+                    align-items:center; gap:.5rem; }
+  .fbranch { align-items:flex-start; gap:1.6rem; margin-top:.2rem; }
+  .fcol { display:flex; flex-direction:column; align-items:center; gap:.4rem; }
+  .fnode { background:var(--card); border:1px solid var(--line); border-radius:9px;
+           padding:.5rem .85rem; font-size:.9rem; text-align:center;
+           box-shadow:0 1px 2px rgba(20,30,50,.06); max-width:16rem; }
+  .fnode b { color:var(--navy); }
+  .fnode small, .fstep small { display:block; font-size:.72rem; color:var(--muted);
+           margin-top:.14rem; font-weight:400; }
+  .fnode.accent { border-color:var(--gold); border-width:1.5px; }
+  .fnode.muted { border-style:dashed; color:var(--muted); }
+  .fnode.stop { border-color:var(--stop); border-width:1.5px; }
+  .fnode.stop b { color:var(--stop); }
+  .fstep { background:var(--chip); border:1px solid var(--line); border-radius:8px;
+           padding:.45rem .7rem; font-size:.85rem; text-align:center; }
+  .fgate { background:var(--card); border:1.5px solid var(--gold); border-radius:9px;
+           padding:.5rem 1.1rem; font-weight:600; font-size:.9rem; }
+  .farrow { color:var(--gold); font-size:1.15rem; line-height:1; }
+  .fchev { color:var(--muted); font-size:1rem; }
+  .flabel { font-size:.72rem; color:var(--muted); font-family:var(--mono); }
+  .frail { margin-top:.4rem; font-size:.78rem; color:var(--muted); font-style:italic;
+           border-top:1px dashed var(--line); padding-top:.5rem; text-align:center; }
+
+  /* SIGNATURE — the answer cascade with the guard spanning every tier */
+  .cascade { display:grid; grid-template-columns: 1fr auto; gap:0 1.1rem;
+             align-items:stretch; max-width:44rem; margin:0 auto; }
+  .tiers { display:flex; flex-direction:column; gap:.5rem; }
+  .tier { display:grid; grid-template-columns:1.6rem 1fr auto; gap:.85rem;
+          align-items:center; background:var(--card); border:1px solid var(--line);
+          border-radius:9px; padding:.65rem .9rem; box-shadow:var(--shadow); }
+  .tier .tn { font-family:var(--mono); font-size:.74rem; color:var(--gold); font-weight:700; }
+  .tier .tt { font-size:.92rem; }
+  .tier .tt b { color:var(--navy); }
+  .tier .tt small { display:block; font-size:.74rem; color:var(--muted); margin-top:.1rem; }
+  .cost { font-family:var(--mono); font-size:.7rem; border-radius:999px;
+          padding:.2rem .6rem; white-space:nowrap; border:1px solid var(--line);
+          color:var(--muted); }
+  .cost.free { border-color:var(--gold-soft); color:var(--gold); }
+  .cost.paid { border-color:var(--navy-soft); color:var(--navy-soft); }
+  .fall { text-align:center; color:var(--muted); font-size:.72rem;
+          font-family:var(--mono); margin:-.15rem 0; }
+  .guard { display:flex; flex-direction:column; align-items:center;
+           justify-content:center; gap:.6rem; border:1.5px solid var(--stop);
+           border-radius:9px; padding:.9rem .55rem; background:var(--card);
+           min-width:3.4rem; }
+  .guard .gtxt { writing-mode:vertical-rl; transform:rotate(180deg);
+           font-family:var(--mono); font-size:.72rem; letter-spacing:.1em;
+           text-transform:uppercase; color:var(--stop); font-weight:700; }
+  .guard .gsub { writing-mode:vertical-rl; transform:rotate(180deg);
+           font-size:.68rem; color:var(--muted); }
+  .cascade-out { display:flex; justify-content:center; gap:.5rem; margin-top:.7rem;
+           flex-wrap:wrap; }
+  @media (max-width: 620px) {
+    .cascade { grid-template-columns:1fr; gap:.9rem; }
+    .guard { flex-direction:row; padding:.5rem .9rem; }
+    .guard .gtxt, .guard .gsub { writing-mode:horizontal-tb; transform:none; }
+  }
+
+  :where(a, button):focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+  @media print {
+    :root { --paper:#fff; --card:#fff; --ink:#111; --muted:#555; }
+    .wrap { max-width:none; padding:0; }
+    .plate, .tier, .hcard, .rule, .stat, .guard { box-shadow:none; }
+    section { margin-top:2.1rem; }
+    /* protect atomic blocks only — avoiding breaks on whole sections strands pages */
+    .plate, .stats, .cascade, .hcard, .rule, .stat, .tier, .note, .verdict,
+    .flow, tr, .stat .n { break-inside:avoid; page-break-inside:avoid; }
+    /* never orphan a heading at the foot of a page */
+    .sec-head, h1, h2, thead { break-after:avoid; page-break-after:avoid; }
+    .lede, .sec-sub { break-before:avoid; }
+    p.body { orphans:3; widows:3; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Personal project · Case study &amp; system model</p>
+    <h1>SEEK Agent</h1>
+    <p class="lede">An autonomous job-application agent that decides what to apply for, which
+      résumé to send, and how to answer an employer's questions — built around one hard rule:
+      it is allowed to cost you the job, but it is never allowed to lie to get it.</p>
+    <div class="stack">
+      <span class="tag">Python</span>
+      <span class="tag">Playwright</span>
+      <span class="tag">Claude API (Sonnet)</span>
+      <span class="tag">JSON local memory</span>
+      <span class="tag">pytest-style suite · 202 tests</span>
+      <span class="tag">3,716 LOC · 38 functions</span>
+      <span class="tag">Jira · Confluence</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>The problem, and the idea</h2>
+    </div>
+    <p class="body">Applying for jobs at volume is mostly repetition. The same forms, the same
+      questions — <span class="eg">"How many years of experience do you have with X?"</span> — across
+      hundreds of listings, most of which were never relevant. The obvious automation is a bot that
+      fires off applications as fast as it can. That build is wrong twice over: it floods employers
+      with noise, and the moment a form asks a question the applicant can't answer well, a
+      volume-optimised bot has every incentive to round up.</p>
+    <p class="body">This is the opposite. The agent applies <b>selectively</b> and answers
+      <b>honestly</b> — and "honestly" is enforced in code, not requested in a prompt. It runs two
+      rules that pull against each other, and the interesting engineering is in how they're
+      reconciled.</p>
+
+    <div class="rules">
+      <div class="rule go">
+        <div class="rk">Rule 1 · be bold</div>
+        <b>Don't miss opportunities</b>
+        <p>A stretch role that rejects you costs nothing. A good role you never saw is a real loss.
+          So false negatives are treated as worse than false positives — a senior title with a
+          genuine AI or automation signal gets collected, not discarded.</p>
+      </div>
+      <div class="rule no">
+        <div class="rk">Rule 2 · be honest</div>
+        <b>Never overclaim</b>
+        <p>Round experience down, never up. No certification, clearance or language is claimed
+          unless it's confirmed in the profile. No job title is quietly reframed into a better one.
+          If honest answers disqualify you, that is the correct outcome.</p>
+      </div>
+    </div>
+
+    <div class="verdict">
+      The agent does not protect the applicant from <b>rejection</b>.<br>
+      It protects the employer from <b>inaccurate answers</b>.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>How a listing becomes an application</h2>
+    </div>
+    <p class="sec-sub">Every job runs through a fixed funnel. Most listings are eliminated on the
+      title alone, for free. Only genuinely ambiguous ones are expensive enough to warrant reading
+      the description. Every decision — including every rejection — is written to the log with the
+      reason and the signals that produced it.</p>
+    <div class="plate">
+      <div class="flow">
+        <div class="fnode accent"><b>Search</b><small>one query per role, deduped by job ID</small></div>
+        <div class="farrow">↓</div>
+        <div class="frow">
+          <div class="fstep">1 · Classify title<small>5-way verdict</small></div>
+          <div class="fchev">→</div>
+          <div class="fstep">2 · Description gate<small>ambiguous titles only</small></div>
+          <div class="fchev">→</div>
+          <div class="fstep">3 · Score résumé<small>3 candidates</small></div>
+          <div class="fchev">→</div>
+          <div class="fstep">4 · Answer questions<small>see §03</small></div>
+        </div>
+        <div class="farrow">↓</div>
+        <div class="fgate">Strategy label + fit-risk assessment</div>
+        <div class="fbranch">
+          <div class="fcol">
+            <div class="flabel">honest answers pass</div>
+            <div class="fnode accent"><b>Submit</b><small>Quick Apply</small></div>
+            <div class="farrow">↓</div>
+            <div class="fnode accent">Logged with reason<small>résumé, score, every answer</small></div>
+          </div>
+          <div class="fcol">
+            <div class="flabel">off-target / unverifiable</div>
+            <div class="fnode stop"><b>Skip</b><small>reason + signals recorded</small></div>
+          </div>
+        </div>
+        <div class="frail">Nothing is discarded silently — a skip is a logged decision, not an absence.</div>
+      </div>
+    </div>
+    <div class="note">
+      <span class="k">TWO GATES</span>
+      <span>A title lands in one of five buckets: <b>clear positive</b> (apply),
+        <b>hard exclude</b> (never — director, chief, trades, clinical), <b>clear negative</b>,
+        or one of two <b>ambiguous</b> grades. Only ambiguous titles cost a description read.
+        The rescue rule matters most: a seniority word like <i>Lead</i> or <i>Manager</i> is
+        <b>not</b> disqualifying if the title also carries a real target signal — <i>AI Enablement
+        Lead</i> survives, <i>Lead Accountant</i> does not.</span>
+    </div>
+    <div class="note stop">
+      <span class="k">SOFT vs HARD</span>
+      <span>In the description gate, negatives are weighted by kind. <i>Construction</i> is a
+        <b>soft</b> negative — it can't cancel explicit IT signals, so an <i>IT Site Coordinator</i>
+        on a building site still passes. <i>Clinical</i>, <i>10+ years</i> or <i>PhD required</i> are
+        <b>hard</b> negatives and always block. This distinction was added after real listings were
+        being dropped for the wrong reason.</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>The signature: an answer cascade that gets cheaper as it learns</h2>
+    </div>
+    <p class="sec-sub">Employer questions are the expensive part — and the part where a careless
+      agent would lie. Four tiers are tried in order, and the model is the last resort, not the
+      first. Every tier, including the free ones, is forced through the same honesty guard before
+      anything reaches the form.</p>
+    <div class="plate">
+      <div class="cascade">
+        <div class="tiers">
+          <div class="tier">
+            <span class="tn">01</span>
+            <span class="tt"><b>Pre-filled</b><small>SEEK remembers a past answer — but it may be wrong</small></span>
+            <span class="cost free">no call</span>
+          </div>
+          <div class="fall">↓ falls through</div>
+          <div class="tier">
+            <span class="tn">02</span>
+            <span class="tt"><b>Override</b><small>208 hand-written corrections for known-wrong answers</small></span>
+            <span class="cost free">no call</span>
+          </div>
+          <div class="fall">↓ falls through</div>
+          <div class="tier">
+            <span class="tn">03</span>
+            <span class="tt"><b>Cache</b><small>342 answers learned from the agent's own history</small></span>
+            <span class="cost free">no call</span>
+          </div>
+          <div class="fall">↓ falls through</div>
+          <div class="tier">
+            <span class="tn">04</span>
+            <span class="tt"><b>Claude</b><small>genuinely new question — answered from profile facts</small></span>
+            <span class="cost paid">API call</span>
+          </div>
+        </div>
+        <div class="guard">
+          <span class="gtxt">Honesty guard</span>
+          <span class="gsub">every tier · no exceptions</span>
+        </div>
+      </div>
+      <div class="cascade-out">
+        <div class="fnode accent"><b>Allowed</b><small>written to the form</small></div>
+        <div class="fnode muted">Flagged<small>answered, marked for review</small></div>
+        <div class="fnode stop"><b>Blocked</b><small>never submitted</small></div>
+      </div>
+      <p class="cap">Figure 1 — The four-tier answer cascade. The guard spans every tier, including
+        the free ones: a cached answer is not trusted merely because the agent wrote it.</p>
+    </div>
+    <div class="note">
+      <span class="k">LEARNING</span>
+      <span>The cache is not hand-built — it's grown. When the same question has been answered the
+        same way <b>three times</b>, that answer is promoted into permanent memory automatically.
+        The 342-entry cache was distilled out of 1,694 logged question–answer pairs. Every promotion
+        makes the next run cheaper and more consistent, and the agent converges on silence rather
+        than spend.</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>What keeps it honest</h2>
+    </div>
+    <p class="sec-sub">Every claim below is a rule in code with a regression test behind it, not an
+      instruction in a prompt. A prompt can be talked out of its principles; a guard clause cannot.</p>
+    <div class="honest">
+      <div class="hcard"><b>It refuses to claim credentials</b><p>Security clearances,
+        certifications and working-with-children checks are hard-blocked unless confirmed in the
+        profile — even if the form has pre-filled a "yes".</p></div>
+      <div class="hcard"><b>It rounds down, never up</b><p>On any years-of-experience question the
+        agent takes the lower bracket. Two years of IT support is answered as two, not "2–5".</p></div>
+      <div class="hcard"><b>It distrusts the form's memory</b><p>SEEK pre-fills answers from past
+        applications. Those are re-checked against 208 overrides and corrected before submission —
+        the most common source of accidental overclaiming.</p></div>
+      <div class="hcard"><b>It won't reframe a job title</b><p>A Bookings Officer who used IT systems
+        daily is not an IT Support Officer. The agent describes the role that existed, not the role
+        that would score better.</p></div>
+      <div class="hcard"><b>It only speaks the languages it speaks</b><p>Any language not listed in
+        the profile defaults to the lowest proficiency option — closing a real bug where forms
+        pre-filled "Native or Bilingual" for languages never spoken.</p></div>
+      <div class="hcard"><b>It states its own confidence</b><p>Each application is labelled —
+        target fit, strategic stretch, worth a shot, or low-confidence default — so a weak
+        application is visible as weak rather than hidden among the strong ones.</p></div>
+      <div class="hcard"><b>It explains every rejection</b><p>A skipped job records its
+        classification, the signals that matched, the description score and the threshold it missed.
+        Skips are auditable, so bad filtering is findable.</p></div>
+      <div class="hcard"><b>It can be told it was wrong</b><p>202 regression tests pin the
+        behaviour, and <span style="font-family:var(--mono);font-size:.85em">--recheck-skips</span>
+        replays every past rejection through improved logic — so a fix reaches the jobs it already
+        got wrong.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2>Under the hood</h2>
+    </div>
+    <p class="sec-sub">A single-module Python agent driving a real browser through Playwright. Claude
+      is a component inside it, not the architecture of it: the model is called only when the local
+      cascade has genuinely run out of answers.</p>
+    <table>
+      <thead>
+        <tr><th>Component</th><th>What it does</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>classify_title</td><td>Returns one of five verdicts for a job title, splitting hard excludes (never rescued) from seniority words (rescued when a real target signal is present).</td></tr>
+        <tr><td>check_description_relevance</td><td>Second gate for ambiguous titles only. Scores positive and negative signals, weighting soft negatives below explicit technical ones.</td></tr>
+        <tr><td>choose_resume</td><td>Scores all three résumés — AI, business systems, and technical — against title, description and search intent, and records the runner-up and margin for auditing.</td></tr>
+        <tr><td>validate_answer_safety</td><td>The central guard. Runs on every answer from every source and returns allow, flag or block. Cached answers are blocked outright on credential claims to force fresh evaluation.</td></tr>
+        <tr><td>auto_cache_from_history</td><td>Promotes an answer to permanent memory after three consistent uses — the mechanism that drives API cost toward zero over time.</td></tr>
+        <tr><td>determine_application_strategy</td><td>Combines title verdict, fit risk and résumé confidence into a plain-English label and reason for every application.</td></tr>
+        <tr><td>already_applied</td><td>Deduplicates by stable job ID across all runs. Description rejections are final unless explicitly replayed, so the agent never re-pays to reconsider the same listing.</td></tr>
+        <tr><td>rate-limit tracker</td><td>Tracks applications per hour and per 24 hours, delays between submissions, and stops the run after consecutive platform errors.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <h2>Local memory — the data model</h2>
+    </div>
+    <p class="sec-sub">There is no database. Memory is four append-friendly JSON stores on disk,
+      which is the right shape for a single-user agent that must be readable, hand-correctable and
+      diffable in Git. The relationship that matters is the loop:
+      <b>question_history</b> is distilled into <b>question_cache</b>, so the agent's own past is
+      what makes its future cheap.</p>
+    <div class="plate">
+<pre class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontFamily':'-apple-system,Segoe UI,Roboto,sans-serif','fontSize':'13px','primaryColor':'#f4f1e8','primaryTextColor':'#20303f','primaryBorderColor':'#16324f','lineColor':'#16324f'}}}%%
+erDiagram
+  PROFILE ||--o{ QUESTION_CACHE : "learns into"
+  PROFILE ||--o{ QUESTION_OVERRIDES : "corrects with"
+  PROFILE ||--o{ RELEVANCE_FILTER : "filters by"
+  PROFILE ||--o{ RESUME_SELECTION : "scores with"
+  QUESTION_HISTORY ||--o{ QUESTION_CACHE : "promoted after 3x"
+  APPLICATIONS_LOG ||--o{ QUESTION_HISTORY : "produces"
+  APPLICATIONS_LOG ||--o{ RUN_HISTORY : "summarised into"
+
+  PROFILE {
+    object personal "identity, location"
+    object experience "roles, years"
+    list  important_boundaries "17 honesty rules"
+    object known_languages "confirmed only"
+    int   salary_expectation_default
+  }
+  QUESTION_CACHE {
+    string question_key PK
+    string answer
+    string tier "fact · template"
+    string source "auto-cached after N"
+  }
+  QUESTION_OVERRIDES {
+    string match_key PK
+    string correct_answer
+  }
+  RELEVANCE_FILTER {
+    list relevant_keywords "310"
+    list irrelevant_keywords "288"
+  }
+  RESUME_SELECTION {
+    string category PK "ai · business · tech"
+    list   keywords
+    list   description_signals
+  }
+  APPLICATIONS_LOG {
+    string job_id PK
+    string title
+    string company
+    string status "applied · skipped · failed"
+    string application_strategy
+    string strategy_reason
+    string resume_used
+    int    resume_score
+    list   fit_risk_flags
+    list   description_signals
+  }
+  QUESTION_HISTORY {
+    string question
+    string answer
+    string source "pre-filled · cached · claude"
+    string job
+    string timestamp
+  }
+  RUN_HISTORY {
+    string timestamp PK
+    int    applied
+    int    skipped
+    float  cost
+    int    api_calls
+    int    cached_answers_used
+    object yield
+  }
+</pre>
+    </div>
+    <div class="legend">
+      <span><b>PK</b> key field</span>
+      <span><b>one&nbsp;──&lt;&nbsp;many</b> (one log produces many questions)</span>
+      <span><b>JSON</b> document stores, not tables</span>
+    </div>
+    <p class="cap">Figure 2 — The four local stores and the learning loop between them.</p>
+    <div class="note">
+      <span class="k">WHY JSON</span>
+      <span>A relational store would be the reflex choice and the wrong one here. The profile is
+        edited by hand constantly — a wrong answer is fixed by opening the file and correcting it.
+        Keeping memory as readable documents means every override is reviewable in a diff, and the
+        honesty rules are legible to the person accountable for them.</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">07</span>
+      <h2>Outcomes</h2>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="n">330</span><span class="l">Live applications</span></div>
+      <div class="stat"><span class="n">2,059</span><span class="l">Logged decisions</span></div>
+      <div class="stat"><span class="n">367</span><span class="l">Distinct employers</span></div>
+      <div class="stat"><span class="n">202</span><span class="l">Automated tests</span></div>
+      <div class="stat"><span class="n">69%</span><span class="l">Questions answered free</span></div>
+    </div>
+    <p class="body" style="margin-top:1.6rem">The application log holds 2,059 job decisions: 474
+      applications (330 live, 144 in dry-run), 1,543 skips and 42 failures — every one carrying the
+      reason it was made, across 367 distinct employers. The agent has classified 1,547 distinct job
+      titles and eliminated the overwhelming majority on the title alone, for free.</p>
+    <p class="body">The economics are the point. Of 1,694 employer questions encountered,
+      <b>69% were answered with no model call at all</b> — from the form's own memory, from 208
+      overrides, or from the 342-entry cache the agent distilled out of its own history. Only the
+      genuinely novel 31% reached Claude. Of the runs carrying cost telemetry — 23 runs and 167 of
+      those applications — total spend was <b>$0.59</b>, about a third of a cent per application.
+      That rate falls as the cache grows, because every question answered three times the same way
+      stops being a question.</p>
+    <p class="body">The safety record is the part worth defending: no certification, clearance or
+      language has been claimed that wasn't in the profile, because the guard runs on every answer
+      from every source — including the ones the agent wrote itself.</p>
+    <div class="note">
+      <span class="k">SCOPE</span>
+      <span>Two different windows, deliberately not blended. The <b>330 live applications</b> come
+        from the full application log; the <b>$0.59 / 167 applications</b> figure covers only the 23
+        runs recorded after per-run cost telemetry was added. Dividing total spend by total lifetime
+        applications would flatter the number by roughly half — so the denominators are reported
+        separately rather than averaged into one better-looking statistic.</span>
+    </div>
+
+    <div class="skills">
+      <span class="skill">Python</span>
+      <span class="skill">Browser automation (Playwright)</span>
+      <span class="skill">LLM application &amp; prompt design</span>
+      <span class="skill">Decision-cascade architecture</span>
+      <span class="skill">Cost-aware API usage</span>
+      <span class="skill">Rules-vs-model trade-off design</span>
+      <span class="skill">Automated regression testing</span>
+      <span class="skill">Structured logging &amp; metrics</span>
+      <span class="skill">Data modelling (document stores)</span>
+      <span class="skill">Git</span>
+      <span class="skill">Jira · Confluence</span>
+    </div>
+  </section>
+
+  <footer>
+    Personal project by Mason Tatafu · figures generated from the agent's own logs
+    (<span style="font-family:var(--mono);font-size:.9em">applications_log.json</span>,
+    <span style="font-family:var(--mono);font-size:.9em">question_history.json</span>,
+    <span style="font-family:var(--mono);font-size:.9em">run_history.json</span>) and a test run of
+    the live suite. The agent runs locally and applies only on Mason's own behalf; it holds no
+    credentials beyond a saved browser session and an API key kept out of source control.
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, securityLevel:"loose", flowchart:{htmlLabels:true}});</script>
+</body>
+</html>
