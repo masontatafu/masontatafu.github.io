@@ -83,20 +83,6 @@ Selected projects are presented as case studies rather than public source code, 
   <a href="https://doggodiary.shop" target="_blank" rel="noopener noreferrer">View site</a>
 </div>
 
-<div class="project-card">
-  <h3>AI-Assisted Project Documentation</h3>
-  <p>Created structured documentation for technical projects including changelogs, metrics reports, run summaries, decision notes, implementation reviews, and system design explanations. The focus was on making technical progress easier to understand, review, and improve over time.</p>
-  <div class="project-tags">
-    <span class="tag">Documentation</span>
-    <span class="tag">Confluence</span>
-    <span class="tag">Changelogs</span>
-    <span class="tag">Metrics</span>
-    <span class="tag">Technical Writing</span>
-  </div>
-  <!-- Replace # with a public documentation hub or Confluence link when ready. -->
-  <a href="#" target="_blank" rel="noopener noreferrer">Documentation link coming soon</a>
-</div>
-
 </div>
 
 ---
